@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Header from '../../components/Header';
+import DisplayField from '../../components/DisplayField';
 
 class App extends Component {
   constructor() {
@@ -33,7 +35,9 @@ postTest = () => {
     console.log('state', this.state.cardList)
     return (
       <div className="App">
-        <h1>Sticky Dos</h1>
+        <Header />
+        <DisplayField />
+        <div className="BG"></div>
       </div>
     )
   }
