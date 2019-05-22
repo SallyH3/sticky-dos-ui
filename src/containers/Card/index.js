@@ -9,8 +9,10 @@ class Card extends Component {
   }
 
   render() {
+    const {title, content} = this.props
     return (
       <article className="Card">
+      {title}
         <section className="Card--header">
           <h2>Title</h2>
           <button className="Card__trash">X</button>

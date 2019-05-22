@@ -11,10 +11,10 @@ class App extends Component {
   }
 
 componentDidMount = () => {
-  const url = 'http://localhost:3000/api/v1/cardList'
+  const url = 'http://localhost:3001/api/v1/cardList'
   fetch(url)
   .then(response => response.json())
-  .then(cardList => this.setState({ cardList }))
+  .then(result => this.setState({ cardList: result.cardList }))
   .catch(error => alert('Error fetching data'))
 }
 
@@ -32,11 +32,11 @@ postTest = () => {
 }
 
   render() {
-    console.log('state', this.state.cardList)
+    // console.log('state', this.state.cardList)
     return (
       <div className="App">
         <Header />
-        <DisplayField />
+        <DisplayField cardList={this.state.cardList} />
         <div className="BG"></div>
       </div>
     )
