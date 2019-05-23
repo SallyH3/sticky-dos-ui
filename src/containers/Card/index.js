@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import { connect } from 'react-redux';
+import { deleteCard } from '../../actions';
 
 class Card extends Component {
   constructor() {
@@ -9,20 +11,20 @@ class Card extends Component {
   }
 
   handleClick = () => {
-
     this.deleteCard(this.props.id)
+
   }
 
   deleteCard = (id) => {
     console.log('id passed down', id)
     const url = `http://localhost:3001/api/v1/cardList/${id}`
     fetch(url, {
-      method: 'DELETE',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({id})
+      method: 'DELETE'
     })
+    this.props.deleteCard(id)
+  };
 
-  }
+  
 
   render() {
     const {title, content} = this.props
@@ -44,4 +46,8 @@ class Card extends Component {
   }
 }
 
-export default Card;
+export const mapDispatchToProps =(dispatch) => ({
+  deleteCard: (id) => dispatch(deleteCard(id))
+})
+
+export default connect(null, mapDispatchToProps)(Card)
