@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import Header from '../../components/Header';
 import DisplayField from '../../components/DisplayField';
 import { connect } from 'react-redux';
-import { setCardList } from '../../actions'
+import { setCardList } from '../../actions';
+import { Route } from 'react-router-dom';
+import Form from '../Form';
 
 export class App extends Component {
   constructor() {
@@ -44,8 +46,11 @@ postTest = () => {
     // console.log('state', this.state.cardList)
     return (
       <div className="App">
-        <Header />
-        <DisplayField cardList={this.state.cardList} />
+        <Route path = '/' component = { DisplayField } />
+        <Route path = '/' component = { Header } />
+        <Route exact path = '/new-note' component = { Form } />
+        {/* <Header />
+        <DisplayField cardList={this.state.cardList} /> */}
         <div className="BG"></div>
       </div>
     )
