@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
+import { connect } from 'react-redux';
+import { deleteCard } from '../../actions';
 
-class Card extends Component {
+export class Card extends Component {
   constructor() {
     super()
     this.state = {
@@ -8,13 +10,29 @@ class Card extends Component {
     }
   }
 
+  handleClick = () => {
+    this.deleteCard(this.props.id)
+
+  }
+
+  deleteCard = (id) => {
+    console.log('id passed down', id)
+    const url = `http://localhost:3001/api/v1/cardList/${id}`
+    fetch(url, {
+      method: 'DELETE'
+    })
+    this.props.deleteCard(id)
+  };
+
+  
+
   render() {
     const {title, content} = this.props
     return (
       <article className="Card">
         <section className="Card__header">
           <h4>{title}</h4>
-          <button className="Card__trash">X</button>
+          <button onClick={this.handleClick} className="Card__trash">X</button>
         </section>
         <div></div>
         <ul>
@@ -28,4 +46,8 @@ class Card extends Component {
   }
 }
 
-export default Card;
+export const mapDispatchToProps =(dispatch) => ({
+  deleteCard: (id) => dispatch(deleteCard(id))
+})
+
+export default connect(null, mapDispatchToProps)(Card)

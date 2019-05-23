@@ -1,10 +1,13 @@
 import React from 'react';
 import Card from '../../containers/Card';
+import { connect } from 'react-redux'; 
 
-const DisplayField = ({cardList}) => {
+export const DisplayField = (props) => {
 
-	const displayCards = cardList.map(card => {
-		return <Card {...card} />
+	console.log(props.cardList)
+
+	const displayCards = props.cardList.map(card => {
+		return <Card {...card} key={card.id}/>
 	})
 
   return (
@@ -14,4 +17,9 @@ const DisplayField = ({cardList}) => {
   );
 }
 
-export default DisplayField;
+export const mapStateToProps = (state) => ({
+	cardList: state.cardList
+})
+
+export default connect(mapStateToProps)(DisplayField)
+
