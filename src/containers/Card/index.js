@@ -8,13 +8,29 @@ class Card extends Component {
     }
   }
 
+  handleClick = () => {
+
+    this.deleteCard(this.props.id)
+  }
+
+  deleteCard = (id) => {
+    console.log('id passed down', id)
+    const url = `http://localhost:3001/api/v1/cardList/${id}`
+    fetch(url, {
+      method: 'DELETE',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({id})
+    })
+
+  }
+
   render() {
     const {title, content} = this.props
     return (
       <article className="Card">
         <section className="Card__header">
           <h4>{title}</h4>
-          <button className="Card__trash">X</button>
+          <button onClick={this.handleClick} className="Card__trash">X</button>
         </section>
         <div></div>
         <ul>
