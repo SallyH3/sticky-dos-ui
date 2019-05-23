@@ -16,7 +16,8 @@ componentDidMount = () => {
   const url = 'http://localhost:3001/api/v1/cardList'
   fetch(url)
   .then(response => response.json())
-  .then(result => this.handleCardList(result.cardList)
+  .then(result => 
+    this.handleCardList(result.cardList)
     )
   .catch(error => alert('Error fetching data'))
 }
