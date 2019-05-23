@@ -5,8 +5,20 @@ const DisplayField = () => {
   return (
     <main className="DisplayField">
       <Card />
+      <Card />
+      <Card />
+      <Card />
+      <Card />
+      <Card />
+      <Card />
+      <Card />
+      <Card />
+      <Card />
+      <Card />
+      <Card />
+      <Card />
     </main>
-  )
+  );
 }
 
 export default DisplayField;

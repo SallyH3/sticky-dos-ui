@@ -7,6 +7,11 @@ const Header = () => {
         <p>ICON</p>
         <h1>Sticky Do's</h1>
       </section>
+      <form>
+        <input 
+        type="text"
+        placeholder="Take a Note..." />
+      </form>
       
     </header>
   )
