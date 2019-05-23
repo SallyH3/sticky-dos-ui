@@ -1,4 +1,5 @@
 import React from 'react';
+import Form from '../../containers/Form';
 
 const Header = () => {
   return (
@@ -7,11 +8,7 @@ const Header = () => {
         <p>ICON</p>
         <h1>Sticky Do's</h1>
       </section>
-      <form>
-        <input 
-        type="text"
-        placeholder="Take a Note..." />
-      </form>
+      <Form />
       
     </header>
   )
