@@ -11,7 +11,7 @@ const DisplayField = ({cardList}) => {
     <main className="DisplayField">
       {displayCards}
     </main>
-  )
+  );
 }
 
 export default DisplayField;
