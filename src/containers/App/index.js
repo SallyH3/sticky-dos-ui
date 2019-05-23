@@ -11,7 +11,7 @@ class App extends Component {
   }
 
 componentDidMount = () => {
-  const url = 'http://localhost:3000/api/v1/cardList'
+  const url = 'http://localhost:3001/api/v1/cardList'
   fetch(url)
   .then(response => response.json())
   .then(cardList => this.setState({ cardList }))

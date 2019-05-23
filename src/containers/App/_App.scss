@@ -1,19 +1,159 @@
-.App {
-  text-align: center;
+html {
+  background-color: #9f7b65;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+header, 
+main {
+  position: relative;
+  z-index: 2;
+  box-sizing: border-box;
+}
+
+header {
+  position: absolute;
+  left: 4.65%;
+  right: 4.38%;
+  top: 3.33%;
+  bottom: 83.67%;
+  padding: 2%;
+
+  background: #E5E5E5;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.45);
+  border-radius: 10px;
+}
+
+main {
+  position: absolute;
+  width: 91%;
+  height: 65%;
+  left: 4.5%;
+  top: 27%;
+
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  flex-flow: wrap;
+  padding: 1%;
+  // flex-wrap: wrap;
+  overflow-y: scroll;
+
+    article {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      width: 20%;
+      min-height: 40%;
+      margin-bottom: min(4%);
+      margin-left: min(4%);
+      background: #E5E5E5;
+      border-radius: 10px;
+      box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.45);
+
+        div {
+          content: '';
+          height: 3px;
+          width: 85%;
+          position: relative;
+          margin: 0 auto;
+          border-radius: 100px;
+          background: lightgray;
+        }
+    }
 }
 
-.App-link {
-  color: #61dafb;
+main::-webkit-scrollbar {
+  background-color: rgba(0, 0, 0, 0.45);
+  width: 7px;
 }
 
+main::-webkit-scrollbar-thumb {
+  background-color: lightgray;
+  border-radius: 10px;
+}
+
+// !! When we toggle CardList length
+// !! Toggle this class for SCROLLBAR
+// .scroll {
+//   main::-webkit-scrollbar {
+//     background-color: rgba(0, 0, 0, 0.45);
+//     width: 7px;
+//   }
+
+//   main::-webkit-scrollbar-thumb {
+//     background-color: lightgray;
+//     border-radius: 10px;
+//   }
+// }
+
+.Card__header {
+position: relative;
+top: 0;
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+padding: 5px 8%;
+
+  h2 {
+    margin: 0;
+  }
+}
+
+header {
+  display: flex;
+  flex-direction: row;
+justify-content: space-between;
+
+
+    .header__title {
+      p,h1 {
+        margin: 0;
+      }
+
+      h1 {
+        font-family: Patrick Hand;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 35px;
+        margin-left: 15px;
+      }
+
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+
+    }
+
+    form {
+      display: flex;
+      justify-content: flex-start;
+      position: relative;
+      width: 693px;
+      height: 49px;
+
+      background: #C4C4C4;
+      box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+      border-radius: 10px;
+
+        input {
+          box-sizing: border-box;
+          background-color: rgba(0, 0, 0, 0);
+          border: none;
+          padding: 20px;
+          width: 70%;
+          font-size: 22px;
+        }
+    }
+}
+
+
+.BG {
+  content: '';
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  left: 0px;
+  top: 0px;
+  z-index: 1;
+
+  background: url(https://images.unsplash.com/photo-1500283265283-63cc4f18a97b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80);
+  mix-blend-mode: normal;
+}

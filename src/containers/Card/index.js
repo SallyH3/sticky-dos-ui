@@ -11,10 +11,11 @@ class Card extends Component {
   render() {
     return (
       <article className="Card">
-        <section className="Card--header">
+        <section className="Card__header">
           <h2>Title</h2>
           <button className="Card__trash">X</button>
         </section>
+        <div></div>
         <ul>
           <li>Test String 1</li>
           <li>
