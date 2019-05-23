@@ -77,7 +77,7 @@ class Form extends Component {
           type="text" 
           value={this.state.body[0].content} 
           placeholder="Enter Body" />
-        <label for="checkList"> Click for List Item </label>
+        <label htmlFor="checkList"> Click for List Item </label>
         <input type="checkbox" id="checkList" />
         <input type="submit" />
       </form>
