@@ -14,7 +14,6 @@ export class CardDetails extends Component {
   }
 
   deleteCard = (id) => {
-    console.log('id passed down', id)
     const url = `http://localhost:3001/api/v1/cardList/${id}`
     fetch(url, {
       method: 'DELETE'
@@ -24,7 +23,7 @@ export class CardDetails extends Component {
 
   render() {
     const { title, content, id } = this.props
-    console.log('destucture', id)
+    console.log('destucture hello', id)
     return(
       <article className="Card">
           <section className="Card__header">
