@@ -75,6 +75,8 @@ padding: 5px 8%;
   button {
     box-sizing: border-box;
     padding: 5px 5px;
+    position: relative;
+    z-index: 5;
     height: 50%;
     border-radius: 50%;
   }
