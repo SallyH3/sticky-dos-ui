@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { setCardList } from '../../actions';
 import { Route } from 'react-router-dom';
 import Form from '../Form';
+import CardDetails from '../../components/CardDetails';
 
 export class App extends Component {
   constructor() {
@@ -49,8 +50,21 @@ postTest = () => {
         <Route path = '/' component = { DisplayField } />
         <Route path = '/' component = { Header } />
         <Route exact path = '/new-note' component = { Form } />
-        {/* <Header />
-        <DisplayField cardList={this.state.cardList} /> */}
+        <Route exact path = '/notes/:id' render = {({ match }) => {
+          console.log('match', match)
+          const selectedCard = this.props.cardList.find(card => {
+            console.log('cardID', card.cardList.id)
+            return card.cardList.id === parseInt(match.params.id)
+          })
+          console.log('selectedCard', selectedCard)
+          if(selectedCard) {
+            return <CardDetails 
+              { ...selectedCard.cardList }
+            />
+          }
+        }}
+        />
+        <Route exact path = {'/notes/id'} component = { CardDetails } />
         <div className="BG"></div>
       </div>
     )

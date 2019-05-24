@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { deleteCard } from '../../actions';
+import { NavLink } from 'react-router-dom';
 
 export class Card extends Component {
   constructor() {
@@ -27,21 +28,23 @@ export class Card extends Component {
   
 
   render() {
-    const {title, content} = this.props
+    const {title, content, id} = this.props
     return (
-      <article className="Card">
-        <section className="Card__header">
-          <h4>{title}</h4>
-          <button onClick={this.handleClick} className="Card__trash">X</button>
-        </section>
-        <div></div>
-        <ul>
-          <li>Test String 1</li>
-          <li>
-            <input type="checkbox" value="Test Checkbox" />
-          </li>
-        </ul>
-      </article>
+      <NavLink className = 'Card' to = {`/notes/${this.props.cardList.id}`}>
+        <article className="Card">
+          <section className="Card__header">
+            <h4>{title}</h4>
+            <button onClick={this.handleClick} className="Card__trash">X</button>
+          </section>
+          <div></div>
+          <ul>
+            <li>Test String 1</li>
+            <li>
+              <input type="checkbox" value="Test Checkbox" />
+            </li>
+          </ul>
+        </article>
+      </NavLink>
     )
   }
 }
