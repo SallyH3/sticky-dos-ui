@@ -4,12 +4,23 @@ import { DisplayField, mapStateToProps } from './index.js';
 import Card from '../../containers/Card';
 import { cardList } from '../../actions';
 
+const mockCardList = [
+  {
+    title: 'test',
+    content: 'hello world'
+  },
+  {
+   title: 'test2',
+   content: 'helloooo world' 
+  }
+]
+
 describe('DisplayField', () => {
   let wrapper;
 
   beforeEach(() => {
     wrapper=shallow(
-      <DisplayField />
+      <DisplayField cardList={mockCardList}/>
     )
   })
 
