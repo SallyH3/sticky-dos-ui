@@ -20,7 +20,6 @@ class Form extends Component {
 
   handleStrChange = (e) => {
     let {name, value} = e.target;
-    console.log(name)
     this.setState({
       content: [
         {

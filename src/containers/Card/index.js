@@ -17,7 +17,6 @@ export class Card extends Component {
   }
 
   deleteCard = (id) => {
-    console.log('id passed down', id)
     const url = `http://localhost:3001/api/v1/cardList/${id}`
     fetch(url, {
       method: 'DELETE'
@@ -30,11 +29,11 @@ export class Card extends Component {
   render() {
     const {title, content, id} = this.props
     return (
-      // <NavLink className = 'Card' to = {`/notes/${this.props.cardList.id}`}>
-        <article className="Card">
+      <article className="Card">
+            <button onClick={this.handleClick} className="Card__trash">X</button>
+        <NavLink to = {`/notes/${id}`}>
           <section className="Card__header">
             <h4>{title}</h4>
-            <button onClick={this.handleClick} className="Card__trash">X</button>
           </section>
           <div></div>
           <ul>
@@ -43,8 +42,8 @@ export class Card extends Component {
               <input type="checkbox" value="Test Checkbox" />
             </li>
           </ul>
-        </article>
-      // </NavLink>
+        </NavLink>
+      </article>
     )
   }
 }
