@@ -17,7 +17,6 @@ export class Card extends Component {
   }
 
   deleteCard = (id) => {
-    console.log('id passed down', id)
     const url = `http://localhost:3001/api/v1/cardList/${id}`
     fetch(url, {
       method: 'DELETE'

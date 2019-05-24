@@ -24,7 +24,6 @@ class Form extends Component {
 
   handleStrChange = (e) => {
     let {name, value} = e.target;
-    console.log(name)
     this.setState({
       body: [
         {
@@ -82,8 +81,6 @@ class Form extends Component {
         <input type="submit" />
       </form>
     );
-
-      console.log('FormState', this.state)
 
     return (
       <section>

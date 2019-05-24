@@ -44,19 +44,15 @@ postTest = () => {
 }
 
   render() {
-    // console.log('state', this.state.cardList)
     return (
       <div className="App">
         <Route path = '/' component = { DisplayField } />
         <Route path = '/' component = { Header } />
         <Route exact path = '/new-note' component = { Form } />
         <Route exact path = '/notes/:id' render = {({ match }) => {
-          console.log('match', match)
           const selectedCard = this.props.cardList.find(card => {
-            console.log('cardID', card.cardList.id)
             return card.cardList.id === parseInt(match.params.id)
           })
-          console.log('selectedCard', selectedCard)
           if(selectedCard) {
             return <CardDetails 
               { ...selectedCard.cardList }
