@@ -1,17 +1,32 @@
-import React from 'react';
-import Form from '../../containers/Form';
+import React, {Component} from 'react';
+import {NavLink} from 'react-router-dom';
 
-const Header = () => {
-  return (
+class Header extends Component {
+  constructor() {
+    super()
+    this.state={
+      renderForm: false
+    }
+  }
+
+  render() {
+    let {renderForm} = this.state;
+    return (
     <header>
       <section className="header__title">
         <p>ICON</p>
         <h1>Sticky Do's</h1>
       </section>
-      <Form />
-      
+      {!renderForm && 
+        <form>
+          <NavLink to='/new-note'>
+            Take a Note...
+          </NavLink>
+        </form>
+      }
     </header>
   )
+  }
 }
 
 export default Header;

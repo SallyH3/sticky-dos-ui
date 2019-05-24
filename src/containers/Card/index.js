@@ -28,6 +28,7 @@ export class Card extends Component {
 
   render() {
     const {title, content} = this.props
+    console.log('both',title ,content)
     return (
       <article className="Card">
         <section className="Card__header">
