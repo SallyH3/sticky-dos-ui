@@ -52,15 +52,25 @@ class Form extends Component {
     console.log('storeCardFunc:', fetchedCard)
   }
 
+  isResponseOk = (response) => {
+    if (response.status == 201) {
+      console.log('ThisIs:', response)
+      return response.json()
+    } else {
+      throw new Error('Failed to Post New Note!!')
+    }
+  }
+
   postFetch = (url, init) => {
     return fetch(url, init)
-      .then(response => response.json())
+      .then(response => this.isResponseOk(response))
       .then(result => this.storeCard(result))
+      .catch(error => console.log(error))
   }
 
   postCard = async () => {
     let init = this.buildInit();
-    let url = "http://localhost:3001/api/v1/cardList";
+    let url = "http://localhost:300/api/v1/cardList";
 
     this.postFetch(url, init);
   }

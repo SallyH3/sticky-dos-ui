@@ -24,9 +24,23 @@ export class Card extends Component {
     this.props.deleteCard(id)
   };
 
+  mapListItems = (content) => {
+    console.log('this is a listItem', content)
+    return content.map(li => (
+      <p className="listItem">
+        {!li.checked 
+          && <i class="far fa-square" />}
+        {li.checked 
+          && <i class="fas fa-check-square" />}
+        {li.text}
+      </p>
+    ));
+  }
+
   
 
   render() {
+    console.log(this.props)
     const {title, content, id} = this.props
     return (
       <article className="Card">
@@ -35,13 +49,12 @@ export class Card extends Component {
           <section className="Card__header">
             <h4>{title}</h4>
           </section>
-          <div></div>
-          <ul>
-            <li>Test String 1</li>
-            <li>
-              <input type="checkbox" value="Test Checkbox" />
-            </li>
-          </ul>
+          <div className="content">
+            {content[0].type === "note" 
+              && <p>{content[0].text}</p>}
+            {content[0].type === "list" 
+              && this.mapListItems(content)}
+          </div>
         </NavLink>
       </article>
     )
