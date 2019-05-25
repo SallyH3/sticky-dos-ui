@@ -8,3 +8,14 @@ export const fetchCardList = (url) => {
 		}
 	})
 }
+
+export const postFetch = (url, init) => {
+	return fetch(url, init)
+	.then(response => {
+		if(!response.ok) {
+			throw Error('Error posting data')
+		} else {
+			return response.json();
+		}
+	})
+}

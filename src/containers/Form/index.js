@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { postFetch } from '../../utils/apicalls';
 
 class Form extends Component {
   constructor() {
@@ -52,22 +53,17 @@ class Form extends Component {
     console.log('storeCardFunc:', fetchedCard)
   }
 
-  postFetch = (url, init) => {
-    return fetch(url, init)
-      .then(response => response.json())
-      .then(result => this.storeCard(result))
-  }
-
-  postCard = async () => {
+  postFetch = () => {
     let init = this.buildInit();
     let url = "http://localhost:3001/api/v1/cardList";
 
-    this.postFetch(url, init);
+    postFetch(url, init)
+      .then(result => this.storeCard(result))
   }
 
   handleSubmit = (e) => {
     e.preventDefault()
-    this.postCard();
+    this.postFetch();
   }
 
   mapListInputs = () => {
