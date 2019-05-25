@@ -6,7 +6,7 @@ class Form extends Component {
     super();
     this.state = {
       isList: false,
-      listCount: 1,
+      listCount: 2,
       title: "",
       content: [{}]
     };
@@ -53,9 +53,26 @@ class Form extends Component {
     console.log('storeCardFunc:', fetchedCard)
   }
 
-  postFetch = () => {
+  isResponseOk = (response) => {
+    if (response.status == 201) {
+      console.log('ThisIs:', response)
+      return response.json()
+    } else {
+      throw new Error('Failed to Post New Note!!')
+    }
+  }
+
+  postFetch = (url, init) => {
+    return fetch(url, init)
+      .then(response => this.isResponseOk(response))
+      .then(result => this.storeCard(result))
+      .catch(error => console.log(error))
+  }
+
+  postCard = async () => {
+
     let init = this.buildInit();
-    let url = "http://localhost:3001/api/v1/cardList";
+    let url = "http://localhost:300/api/v1/cardList";
 
     postFetch(url, init)
       .then(result => this.storeCard(result))
@@ -67,12 +84,17 @@ class Form extends Component {
   }
 
   mapListInputs = () => {
-    return (
-      <input 
-        name="listItem"
-        type="text" 
-        placeholder="Enter List Item" />
-    )
+    let {listCount} = this.state;
+    console.log("should be: ", listCount)
+    let mapList = [];
+    let input = (
+      <input name="listItem" type="text" placeholder="Enter List Item" />
+    );
+    for (let i; i < listCount; i++) {
+      mapList.splice(i, 0, input)
+    }
+    console.log('inMAP', mapList)
+    return mapList;
   }
 
   render() {
@@ -92,8 +114,6 @@ class Form extends Component {
       />
     );
 
-    let listInput = this.mapListInputs();
-
       console.log('FormState', this.state)
 
     return (
@@ -109,7 +129,7 @@ class Form extends Component {
           <i class="far fa-check-square" />
         </button>
         {!this.state.isList && stringInput}
-        {this.state.isList && listInput}
+        {this.state.isList && this.mapListInputs()}
         <input type="submit" value="SAVE" />
       </form>
     );
