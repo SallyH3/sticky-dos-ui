@@ -44,20 +44,20 @@ export class Card extends Component {
     const {title, content, id} = this.props
     return (
       <article className="Card">
-            <button onClick={this.handleClick} className="Card__trash">X</button>
-        <NavLink to = {`/notes/${id}`}>
+        <button onClick={this.handleClick} className="Card__trash">
+          <i class="fas fa-trash" />
+        </button>
+        <NavLink to={`/notes/${id}`}>
           <section className="Card__header">
             <h4>{title}</h4>
           </section>
           <div className="content">
-            {content[0].type === "note" 
-              && <p>{content[0].text}</p>}
-            {content[0].type === "list" 
-              && this.mapListItems(content)}
+            {content[0].type === "note" && <p>{content[0].text}</p>}
+            {content[0].type === "list" && this.mapListItems(content)}
           </div>
         </NavLink>
       </article>
-    )
+    );
   }
 }
 

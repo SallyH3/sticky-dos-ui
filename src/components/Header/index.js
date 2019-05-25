@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {NavLink} from 'react-router-dom';
+import ICON from '../../imgs/Sticky-Note.svg';
 
 class Header extends Component {
   constructor() {
@@ -14,7 +15,7 @@ class Header extends Component {
     return (
     <header>
       <section className="header__title">
-        <p>ICON</p>
+        <img src={ICON} alt="Sticky Do's Logo" />
         <h1>Sticky Do's</h1>
       </section>
       {!renderForm && 

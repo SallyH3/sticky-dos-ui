@@ -5,7 +5,7 @@ class Form extends Component {
     super();
     this.state = {
       isList: false,
-      listCount: 1,
+      listCount: 2,
       title: "",
       content: [{}]
     };
@@ -81,12 +81,17 @@ class Form extends Component {
   }
 
   mapListInputs = () => {
-    return (
-      <input 
-        name="listItem"
-        type="text" 
-        placeholder="Enter List Item" />
-    )
+    let {listCount} = this.state;
+    console.log("should be: ", listCount)
+    let mapList = [];
+    let input = (
+      <input name="listItem" type="text" placeholder="Enter List Item" />
+    );
+    for (let i; i < listCount; i++) {
+      mapList.splice(i, 0, input)
+    }
+    console.log('inMAP', mapList)
+    return mapList;
   }
 
   render() {
@@ -106,8 +111,6 @@ class Form extends Component {
       />
     );
 
-    let listInput = this.mapListInputs();
-
       console.log('FormState', this.state)
 
     return (
@@ -123,7 +126,7 @@ class Form extends Component {
           <i class="far fa-check-square" />
         </button>
         {!this.state.isList && stringInput}
-        {this.state.isList && listInput}
+        {this.state.isList && this.mapListInputs()}
         <input type="submit" value="SAVE" />
       </form>
     );
