@@ -62,12 +62,12 @@ class Form extends Component {
   //   }
   // }
 
-  // postFetch = (url, init) => {
-  //   return fetch(url, init)
-  //     .then(response => this.isResponseOk(response))
-  //     .then(result => this.storeCard(result))
-  //     .catch(error => console.log(error))
-  // }
+  postFetch = (url, init) => {
+    return fetch(url, init)
+      .then(response => this.isResponseOk(response))
+      .then(result => this.storeCard(result))
+      .catch(error => console.log(error))
+  }
 
   postCard = async () => {
 
