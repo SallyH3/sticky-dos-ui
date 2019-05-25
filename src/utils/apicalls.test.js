@@ -33,4 +33,18 @@ describe('fetchCardList', () => {
 		fetchCardList(mockUrl);
 		expect(window.fetch).toHaveBeenCalledWith(expected);
 	});
+
+	it('should return a response if the status is ok', async () => {
+		const result = await fetchCardList();
+		expect(result).toEqual(mockCardListResponse)
+	});
+
+	it('should return an error if status is not ok', async () => {
+		window.fetch=jest.fn().mockImplementation(() => {
+			return Promise.resolve({
+				ok: false
+			})
+		});
+		await expect(fetchCardList()).rejects.toEqual(Error('Error fetching data'))
+	});
 });
