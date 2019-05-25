@@ -6,6 +6,7 @@ import { setCardList } from '../../actions';
 import { Route } from 'react-router-dom';
 import Form from '../Form';
 import CardDetails from '../../components/CardDetails';
+import { fetchCardList } from '../../utils/apicalls';
 
 export class App extends Component {
   constructor() {
@@ -17,12 +18,11 @@ export class App extends Component {
 
 componentDidMount = () => {
   const url = 'http://localhost:3001/api/v1/cardList'
-  fetch(url)
-  .then(response => response.json())
+  fetchCardList(url)
   .then(result => 
     this.handleCardList(result.cardList)
     )
-  .catch(error => alert('Error fetching data'))
+ 
 }
 
 handleCardList = (cardList) => {
