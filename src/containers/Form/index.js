@@ -53,21 +53,21 @@ class Form extends Component {
     console.log('storeCardFunc:', fetchedCard)
   }
 
-  isResponseOk = (response) => {
-    if (response.status == 201) {
-      console.log('ThisIs:', response)
-      return response.json()
-    } else {
-      throw new Error('Failed to Post New Note!!')
-    }
-  }
+  // isResponseOk = (response) => {
+  //   if (response.status == 201) {
+  //     console.log('ThisIs:', response)
+  //     return response.json()
+  //   } else {
+  //     throw new Error('Failed to Post New Note!!')
+  //   }
+  // }
 
-  postFetch = (url, init) => {
-    return fetch(url, init)
-      .then(response => this.isResponseOk(response))
-      .then(result => this.storeCard(result))
-      .catch(error => console.log(error))
-  }
+  // postFetch = (url, init) => {
+  //   return fetch(url, init)
+  //     .then(response => this.isResponseOk(response))
+  //     .then(result => this.storeCard(result))
+  //     .catch(error => console.log(error))
+  // }
 
   postCard = async () => {
 
@@ -80,7 +80,7 @@ class Form extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    this.postFetch();
+    this.postCard();
   }
 
   mapListInputs = () => {

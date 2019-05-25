@@ -26,6 +26,7 @@ componentDidMount = () => {
 }
 
 handleCardList = (cardList) => {
+  console.log(cardList)
 this.props.setCardList(cardList)
 this.setState({ cardList })
 }
@@ -51,7 +52,8 @@ postTest = () => {
         <Route exact path = '/new-note' component = { Form } />
         <Route exact path = '/notes/:id' render = {({ match }) => {
           const selectedCard = this.props.cardList.find(card => {
-            return card.cardList.id === parseInt(match.params.id)
+            console.log('app card', card.id)
+            return card.id === parseInt(match.params.id)
           })
           if(selectedCard) {
             return <CardDetails 
