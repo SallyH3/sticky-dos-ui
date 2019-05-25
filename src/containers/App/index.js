@@ -54,11 +54,12 @@ postTest = () => {
         <Route exact path = '/notes/:id' render = {({ match }) => {
           const selectedCard = this.props.cardList.find(card => {
             return card.id === parseInt(match.params.id)
-            console.log(selectedCard)
+            
           })
+        
           if(selectedCard) {
             return <CardDetails 
-              { ...selectedCard.cardList }
+              { ...selectedCard}
             />
           }
         }}
