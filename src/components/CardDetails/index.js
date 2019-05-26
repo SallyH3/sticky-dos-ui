@@ -43,9 +43,9 @@ export class CardDetails extends Component {
     return content.map(li => (
       <p>
         {!li.checked 
-          && <button onClick={this.handleCheck} className='check-btn'> <i className="far fa-square" /> </button>}
+          && <button onClick={this.handleCheck} className='check-btn'> {uncheck} </button>}
         {li.checked 
-          && <button onClick={this.handleCheck} className='check-btn'> <i className="fas fa-check-square" /> </button>}
+          && <button onClick={this.handleCheck} className='check-btn'> {check} </button>}
         {li.text}</p>
 
     ));

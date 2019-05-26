@@ -31,19 +31,6 @@ this.props.setCardList(cardList)
 this.setState({ cardList })
 }
 
-postTest = () => {
-  const sample = {
-    id: 3,
-    title: 'yo',
-    content: [{
-      id: 1,
-      type: 'string',
-      text: 'sample string',
-      checked: null
-    }]
-  }
-}
-
   render() {
     return (
       <div className="App">
