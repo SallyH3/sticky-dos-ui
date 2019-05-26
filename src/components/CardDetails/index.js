@@ -31,18 +31,23 @@ export class CardDetails extends Component {
     }
   }
 
+  handleCheck = (li) => {
+    console.log(li)
+  }
 
 
    mapListItems = (content) => {
-    console.log('this is a listItem', content)
+    let uncheck = <i className="far fa-square" />
+    let check = <i className="fas fa-check-square" />
+    console.log(content)
     return content.map(li => (
-      <p className="listItem">
+      <p>
         {!li.checked 
-          && <i class="far fa-square" />}
+          && <button onClick={this.handleCheck} className='check-btn'> <i className="far fa-square" /> </button>}
         {li.checked 
-          && <i class="fas fa-check-square" />}
-        {li.text}
-      </p>
+          && <button onClick={this.handleCheck} className='check-btn'> <i className="fas fa-check-square" /> </button>}
+        {li.text}</p>
+
     ));
   }
 
@@ -55,7 +60,6 @@ export class CardDetails extends Component {
             <button onClick={this.handleEdit}>Edit</button>
           </section>
           <div className="content">
-            {content[0].type === "note" && <p>{content[0].text}</p>}
             {content[0].type === "list" && this.mapListItems(content)}
           </div>
         </article>
@@ -67,10 +71,12 @@ export class CardDetails extends Component {
             <button onClick={this.handleEdit}>Save</button>
           </section>
           <div className="content">
-            {content[0].type === "note" && <input placeholder={content[0].text} />}
             {content[0].type === "list" && this.mapListItems(content)}
           </div>
         </article>
+
+        console.log('this is content', content)
+        console.log('checkmarks', content[0].checked)
     
       const display = this.state.edit ? canEdit : canNotEdit;
     return(
@@ -84,9 +90,8 @@ export class CardDetails extends Component {
   }
 } 
 
-export default CardDetails;
-// export const mapStateToProps = (state) => ({
-//   cardList: state.cardList
-// })
+export const mapStateToProps = (state) => ({
+  cardList: state.cardList
+})
 
-// export default connect(mapStateToProps)(CardDetails)
+export default connect(mapStateToProps)(CardDetails)

@@ -17,7 +17,7 @@ export class App extends Component {
   }
 
 componentDidMount = () => {
-  const url = 'http://localhost:3001/api/v1/cardList'
+  const url = 'http://localhost:3001/api/v1/cardList/'
   fetchCardList(url)
   .then(result => 
     this.handleCardList(result.cardList)
