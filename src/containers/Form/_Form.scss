@@ -1,0 +1,41 @@
+.Form__Container {
+  display: flex;
+  background: #C4C4C4;
+  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  position: relative;
+  z-index: 4;
+  align-items: center;
+  form {
+  display: flex;
+  justify-content: flex-start;
+  position: relative;
+  z-index: 4;
+  width: 693px;
+  height: 49px;
+
+  
+
+    input {
+      box-sizing: border-box;
+      background-color: rgba(0, 0, 0, 0);
+      border: none;
+      padding: 20px;
+      width: 70%;
+      font-size: 22px;
+    }
+}
+}
+
+
+.Form__changeType {
+  position: relative;
+  z-index: 5;
+  background: none;
+  border: none;
+
+    i {
+      font-size: 30px;
+    }
+}
+
