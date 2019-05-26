@@ -11,7 +11,7 @@ class Header extends Component {
   }
 
   toggleForm = () => {
-    this.setState({ renderForm: !false });
+    // this.setState({ renderForm: !false });
   }
 
   render() {

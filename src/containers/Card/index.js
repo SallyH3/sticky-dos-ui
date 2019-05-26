@@ -25,7 +25,6 @@ export class Card extends Component {
   };
 
   mapListItems = (content) => {
-    console.log('this is a listItem', content)
     return content.map(li => (
       <p className="listItem">
         {!li.checked 
@@ -40,7 +39,6 @@ export class Card extends Component {
   
 
   render() {
-    console.log('In Card', this.props)
     const {title, content, id} = this.props
 
     if (this.state.redirect) {

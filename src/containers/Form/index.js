@@ -82,22 +82,12 @@ class Form extends Component {
   storeCard = () => {
     let {title, content} = this.state;
     let {cardList} = this.props;
-    let newCardList = [...cardList, {title, content}]
-    console.log('propsCardList', newCardList)
-    this.props.setCardList(newCardList)
-  };
 
-// Todo: Refactor to api file
-  isResponseOk = response => {
-    if (response.status == 201) {
-      return response.json();
-    } else {
-      throw new Error("Failed to Post New Note!!");
-    }
+    let newCardList = [...cardList, {title, content}];
+    this.props.setCardList(newCardList);
   };
 
   postFetch = async () => {
-
     let init = this.buildInit();
     let url = "http://localhost:3001/api/v1/cardList";
 
@@ -107,24 +97,13 @@ class Form extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+
     this.postFetch();
     this.setState({ redirect: true });
   };
 
-  mapListInputs = () => {
-    return (
-      <input
-        onChange={this.handleListChange}
-        name="list"
-        type="text"
-        placeholder="Enter List Item"
-      />
-    );
-  };
-
   render() {
-    // ?? If user types in listItem, render +1 input field for list item
-    // Todo: handleChanges on inputs, set to state
+    // Todo: If user types in listItem, render +1 input field for list item
 
     let stringInput = (
       <input
@@ -136,13 +115,9 @@ class Form extends Component {
       />
     );
 
-    let listInputs = this.state.listInputs;
-
     if (this.state.redirect) {
       return <Redirect to="/" />;
     }
-
-    console.log("FormState", this.state);
 
     return (
       <section className="Form__Container">
@@ -161,7 +136,7 @@ class Form extends Component {
             value={this.state.title}
           />
           {!this.state.isList && stringInput}
-          {this.state.isList && listInputs}
+          {this.state.isList && this.state.listInputs}
           <input type="submit" value="SAVE" />
         </form>
       </section>
