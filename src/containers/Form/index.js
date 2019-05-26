@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom';
 import { connect } from "react-redux";
 import { setCardList } from "../../actions";
+import { postFetch } from '../../utils/apicalls';
 
 class Form extends Component {
   constructor(props) {
@@ -95,24 +96,18 @@ class Form extends Component {
     }
   };
 
-// Todo: Refactor to api file
-  postFetch = (url, init) => {
-    return fetch(url, init)
-      .then(response => this.isResponseOk(response))
-      .catch(error => console.log("MayDay", error));
-  };
+  postFetch = async () => {
 
-  postCard = async () => {
     let init = this.buildInit();
     let url = "http://localhost:3001/api/v1/cardList";
 
-    this.postFetch(url, init);
-    this.storeCard(init.body);
+    postFetch(url, init)
+      .then(result => this.storeCard(result))
   };
 
   handleSubmit = e => {
     e.preventDefault();
-    this.postCard();
+    this.postFetch();
     this.setState({ redirect: true });
   };
 
