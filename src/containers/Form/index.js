@@ -130,6 +130,7 @@ class Form extends Component {
 
     postFetch(url, init)
       .then(result => this.storeCard(result))
+      
   };
 
   handleSubmit = e => {

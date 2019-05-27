@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import './_CardDetails.scss'
 import Header from '../Header';
+import { deleteCard } from '../../actions';
   
 export class CardDetails extends Component {
   constructor() {
@@ -15,6 +16,14 @@ export class CardDetails extends Component {
     this.deleteCard(this.props.id)
     // this.props.deleteCard(id)
   }
+
+  deleteCard = (id) => {
+    const url = `http://localhost:3001/api/v1/cardList/${id}`
+    fetch(url, {
+      method: 'DELETE'
+    })
+    this.props.deleteCard(id)
+  };
   
   handleEdit = () => {
     console.log(this.props.id)
@@ -71,7 +80,7 @@ export class CardDetails extends Component {
       console.log('this is content', content)
       console.log('checkmarks', content[0].checked)
       const display = this.state.edit ? canEdit : canNotEdit;
-      
+
       return(
         <div>
           <Header />
@@ -85,6 +94,10 @@ export class CardDetails extends Component {
   
 export const mapStateToProps = (state) => ({
   cardList: state.cardList
+})
+
+export const mapDispatchToProps =(dispatch) => ({
+  deleteCard: (id) => dispatch(deleteCard(id))
 })
 
 export default connect(mapStateToProps)(CardDetails)
