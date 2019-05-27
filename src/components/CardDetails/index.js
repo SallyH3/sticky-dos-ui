@@ -66,6 +66,10 @@ export class CardDetails extends Component {
       </fieldset>
     ));
   }
+
+  handleSave = () => {
+
+  }
   
   render() {
     const { title, content, id } = this.props;
@@ -80,26 +84,20 @@ export class CardDetails extends Component {
       console.log('checkmarks', content[0].checked)
 
       return (
-        <div>
-          <Header />
-          <main>
-            <article className="big-card">
-              <section className="Card__header">
-                <input className="title" value={title} />
-                <button
-                  onClick={this.handleClick}
-                  className="Card__trash"
-                >
-                  X
-                </button>
-                <button onClick={this.handleEdit}>Save</button>
-              </section>
-              <div className="content">
-                {content[0].type === "list" && this.mapListItems(content)}
-              </div>
-            </article>
-          </main>
-        </div>
+        <article className="big-card">
+          <form>
+            <fieldset className="Card__header">
+              <input className="title" value={title} />
+              <button onClick={this.handleClick} className="Card__trash">
+                X
+              </button>
+              <input type="submit" onClick={this.handleSave} />
+            </fieldset>
+            <div className="content">
+              {content[0].type === "list" && this.mapListItems(content)}
+            </div>
+          </form>
+        </article>
       );
     }
   } 
