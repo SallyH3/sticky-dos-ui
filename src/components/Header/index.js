@@ -10,6 +10,10 @@ class Header extends Component {
     }
   }
 
+  toggleForm = () => {
+    // this.setState({ renderForm: !false });
+  }
+
   render() {
     let {renderForm} = this.state;
     return (
@@ -19,11 +23,13 @@ class Header extends Component {
         <h1>Sticky Do's</h1>
       </section>
       {!renderForm && 
-        <form>
+        <section 
+        onClick={this.toggleForm}
+        className="Nav-to-Form">
           <NavLink to='/new-note'>
             Take a Note...
           </NavLink>
-        </form>
+        </section>
       }
     </header>
   )
