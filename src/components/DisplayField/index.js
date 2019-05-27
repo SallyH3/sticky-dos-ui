@@ -1,24 +1,47 @@
-import React from 'react';
+import React, {Component} from 'react';
 import Card from '../../containers/Card';
 import { connect } from 'react-redux'; 
+import {fetchCardList} from '../../utils/apicalls';
+import { setCardList } from "../../actions";
 
-export const DisplayField = (props) => {
+export class DisplayField extends Component {
+  constructor(props) {
+    super(props)
 
-	const displayCards = props.cardList.map(card => {
-		console.log('this is the card', card)
-		return <Card {...card} key={card.id}/>
-	})
+  }
 
-  return (
-    <main className="DisplayField">
-      {displayCards}
-    </main>
-  );
+  componentDidUpdate = (prevprops) => {
+    if (prevprops !== this.props.cardList) {
+      const url = "http://localhost:3001/api/v1/cardList";
+      fetchCardList(url).then(result =>
+        this.handleCardList(result.cardList)
+      );
+    }
+  }
+
+  handleCardList = (cardList) => {
+    this.props.setCardList(cardList)
+  }
+  
+  render() {
+    let displayCards = this.props.cardList.map(card => {
+      console.log('this is the card', card)
+      return <Card {...card} key={card.id}/>
+    })
+    return (
+      <main className="DisplayField">
+        {displayCards}
+      </main>
+    );
+  }
 }
 
 export const mapStateToProps = (state) => ({
 	cardList: state.cardList
 })
 
-export default connect(mapStateToProps)(DisplayField)
+export const mapDispatchToProps = dispatch => ({
+  setCardList: cardList => dispatch(setCardList(cardList))
+});
 
+export default connect(mapStateToProps, mapDispatchToProps)(DisplayField)
