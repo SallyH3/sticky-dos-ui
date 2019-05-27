@@ -38,7 +38,7 @@ export class Card extends Component {
 
   render() {
     const {title, content, id} = this.props
-
+    console.log('this is content', content)
     if (this.state.redirect) {
       return <Redirect to={`/notes/${id}`} />;
     }

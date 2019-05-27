@@ -19,7 +19,9 @@ class Header extends Component {
     return (
     <header>
       <section className="header__title">
-        <img src={ICON} alt="Sticky Do's Logo" />
+         <NavLink to={'/'} > 
+            <img src={ICON} alt="Sticky Do's Logo" /> 
+          </NavLink>
         <h1>Sticky Do's</h1>
       </section>
       {!renderForm && 
