@@ -62,4 +62,5 @@ export const mapStateToProps = (state) => ({
 export const mapDispatchToProps = (dispatch) => ({
   setCardList: (cardList) => dispatch(setCardList(cardList))
 })
+
 export default connect(mapStateToProps, mapDispatchToProps)(App)
