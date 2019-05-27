@@ -6,12 +6,13 @@ import Header from '../Header';
 import { deleteCard } from '../../actions';
   
 export class CardDetails extends Component {
-  constructor() {
-    super();
-    this.state={
+  constructor(props) {
+    super(props);
+    this.state = {
       edit: false,
-      redirect: false
-    }
+      redirect: false,
+      updatedCard: {...this.props}
+    };
   }
   
   handleClick = () => {
@@ -28,31 +29,41 @@ export class CardDetails extends Component {
     this.props.deleteCard(id)
   };
   
-  handleEdit = () => {
-    console.log(this.props.id)
-    if (this.state.edit === true) {
-      this.setState({edit: false})
-    } else {
-      this.setState({edit: true})
-    }
-  }
-  
   handleCheck = (li) => {
-    console.log(li)
+    console.log('li ID', li.id)
+    let status = li.checked;
+    status = !status;
+
+    let updatedCard = this.state.updatedCard;
+    updatedCard.content.map(item => {
+      console.log('in map',item.id)
+      if (li.id == item.id) {
+        item.checked = status;
+      }
+    })
+
+    this.setState({updatedCard});
   }
   
   mapListItems = (content) => {
-    let uncheck = <i className="far fa-square" />
-    let check = <i className="fas fa-check-square" />
     console.log(content)
-    return content.map(li => (
-      <p>
-        {!li.checked 
-          && <button onClick={this.handleCheck} className='check-btn'> {uncheck} </button>}
-        {li.checked 
-          && <button onClick={this.handleCheck} className='check-btn'> {check} </button>}
-        {li.text}</p>
 
+    return content.map(li => (
+      <fieldset>
+        {!li.checked && (
+          <i
+            className="far check-btn  fa-square"
+            onClick={() => this.handleCheck(li)}
+          />
+        )}
+        {li.checked && (
+          <i
+            className="fas check-btn fa-check-square"
+            onClick={() => this.handleCheck(li)}
+          />
+        )}
+        <input type="text" value={li.text} />
+      </fieldset>
     ));
   }
   
@@ -64,51 +75,41 @@ export class CardDetails extends Component {
       console.log('Is it triggering')
       this.deleteCard(this.props.id);
       return <Redirect to="/" />;
-    }
-
-    const canNotEdit =  
-      <article className="big-card">
-        <section className="Card__header">
-          <h4>{title}</h4>
-          <button onClick={this.handleClick} className="Card__trash">X</button>
-          <button onClick={this.handleEdit}>Edit</button>
-        </section>
-        <div className="content">
-          {content[0].type === "list" && this.mapListItems(content)}
-        </div>
-      </article>
-    const canEdit =         
-      <article className="big-card">
-        <section className="Card__header">
-          <input className='title' placeholder={title} />
-          <button onClick={this.handleClick} className="Card__trash">X</button>
-          <button onClick={this.handleEdit}>Save</button>
-        </section>
-        <div className="content">
-          {content[0].type === "list" && this.mapListItems(content)}
-        </div>
-      </article>
-      console.log('this is content', content)
+    }       
+      
       console.log('checkmarks', content[0].checked)
-      const display = this.state.edit ? canEdit : canNotEdit;
 
-      return(
+      return (
         <div>
           <Header />
           <main>
-            {display}
+            <article className="big-card">
+              <section className="Card__header">
+                <input className="title" value={title} />
+                <button
+                  onClick={this.handleClick}
+                  className="Card__trash"
+                >
+                  X
+                </button>
+                <button onClick={this.handleEdit}>Save</button>
+              </section>
+              <div className="content">
+                {content[0].type === "list" && this.mapListItems(content)}
+              </div>
+            </article>
           </main>
         </div>
-      )
+      );
     }
   } 
   
-export const mapStateToProps = (state) => ({
-  cardList: state.cardList
-})
+// export const mapStateToProps = (state) => ({
+//   // cardList: state.cardList
+// })
 
 export const mapDispatchToProps =(dispatch) => ({
   deleteCard: (id) => dispatch(deleteCard(id))
 })
 
-export default connect(mapStateToProps,mapDispatchToProps)(CardDetails);
+export default connect(null, mapDispatchToProps)(CardDetails);
