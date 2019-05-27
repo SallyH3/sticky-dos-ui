@@ -10,15 +10,6 @@ export class DisplayField extends Component {
 
   }
 
-  componentDidUpdate = (prevprops) => {
-    if (prevprops !== this.props.cardList) {
-      const url = "http://localhost:3001/api/v1/cardList";
-      fetchCardList(url).then(result =>
-        this.handleCardList(result.cardList)
-      );
-    }
-  }
-
   handleCardList = (cardList) => {
     this.props.setCardList(cardList)
   }
