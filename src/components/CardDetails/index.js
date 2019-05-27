@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import './_CardDetails.scss'
 import Header from '../Header';
 import { deleteCard } from '../../actions';
@@ -8,13 +9,15 @@ export class CardDetails extends Component {
   constructor() {
     super();
     this.state={
-      edit: false
+      edit: false,
+      redirect: false
     }
   }
   
   handleClick = () => {
-    this.deleteCard(this.props.id)
+    console.log('DELETE')
     // this.props.deleteCard(id)
+    this.setState({ redirect: true });
   }
 
   deleteCard = (id) => {
@@ -54,7 +57,15 @@ export class CardDetails extends Component {
   }
   
   render() {
-    const { title, content, id } = this.props
+    const { title, content, id } = this.props;
+    console.log('detailSTATE', this.state)
+
+    if (this.state.redirect) {
+      console.log('Is it triggering')
+      this.deleteCard(this.props.id);
+      return <Redirect to="/" />;
+    }
+
     const canNotEdit =  
       <article className="big-card">
         <section className="Card__header">
@@ -100,4 +111,4 @@ export const mapDispatchToProps =(dispatch) => ({
   deleteCard: (id) => dispatch(deleteCard(id))
 })
 
-export default connect(mapStateToProps)(CardDetails)
+export default connect(mapStateToProps,mapDispatchToProps)(CardDetails);
