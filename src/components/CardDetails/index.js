@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import './_CardDetails.scss'
-import Header from '../Header';
 import { deleteCard } from '../../actions';
+import {postFetch} from '../../utils/apicalls';
   
 export class CardDetails extends Component {
   constructor(props) {
@@ -67,8 +67,25 @@ export class CardDetails extends Component {
     ));
   }
 
-  handleSave = () => {
+  buildInit = () => {
 
+    console.log('built w/', this.state.updatedCard)
+
+    return {
+      method: 'PUT',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(this.state.updatedCard)
+    }
+  }
+
+  handleSave = (e, id) => {
+    e.preventDefault();
+    let URL = `http://localhost:3001/api/v1/cardList/${id}`;
+    let init = this.buildInit();
+
+    console.log('I wanna post', init);
+
+    postFetch(URL, init)
   }
   
   render() {
@@ -91,7 +108,7 @@ export class CardDetails extends Component {
               <button onClick={this.handleClick} className="Card__trash">
                 X
               </button>
-              <input type="submit" onClick={this.handleSave} />
+              <input type="submit" onClick={(e) => this.handleSave(e, id)} />
             </fieldset>
             <div className="content">
               {content[0].type === "list" && this.mapListItems(content)}

@@ -15,7 +15,7 @@ export const postFetch = (url, init) => {
 		if(!response.ok) {
 			throw Error('Error posting data')
 		} else {
-			return response.json();
+			return response;
 		}
 	})
 }
