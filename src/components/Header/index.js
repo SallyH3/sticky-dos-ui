@@ -25,7 +25,7 @@ class Header extends Component {
       {!renderForm && 
         <section 
         onClick={this.toggleForm}
-        className="Form__Container">
+        className="Nav-to-Form">
           <NavLink to='/new-note'>
             Take a Note...
           </NavLink>

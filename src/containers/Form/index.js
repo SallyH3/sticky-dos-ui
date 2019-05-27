@@ -9,18 +9,28 @@ class Form extends Component {
     super(props);
     this.state = {
       redirect: false,
+      title: "",
+      content: [{}],
       isList: false,
       listCount: 2,
       listInputs: [
-        <input
-          onChange={this.handleListChange}
-          name="list"
-          type="text"
-          placeholder="Enter List Item"
-        />
-      ],
-      title: "",
-      content: [{}]
+        [
+          <input
+            key="0"
+            id="0"
+            onChange={this.handleListChange}
+            name="list"
+            type="text"
+            placeholder="Enter List Item"
+          />,
+          <i
+            key="i-0"
+            id="0"
+            onClick={this.addListInput}
+            className="far fa-plus-square"
+          />
+        ]
+      ]
     };
   }
 
@@ -48,22 +58,49 @@ class Form extends Component {
     });
   };
 
+  addListInput = (e) => {
+    let {id} = e.target;
+    id = parseInt(id);
+
+    console.log('addList', id + 1)
+    let listInputs = this.state.listInputs;
+    console.log('before', listInputs.length)
+    listInputs.push([
+      <input
+        key={listInputs.length}
+        id={listInputs.length}
+        onChange={this.handleListChange}
+        name="list"
+        type="text"
+        placeholder="Enter List Item"
+      />,
+      <i
+        key={`i-${listInputs.length}`}
+        id={listInputs.length}
+        onClick={this.addListInput}
+        className="far fa-minus-square"
+      />
+    ]);
+    console.log("after", listInputs.length);
+
+    this.setState({listInputs})
+  }
+
   handleListChange = e => {
-    let { name, value } = e.target;
-    
-    let inputTag = this.state.listInputs[0];
-    let inputsToRender = [inputTag, inputTag];
+    let { name, value, id } = e.target;
 
-    console.log('This many inputs', inputsToRender.length)
+    let content = this.state.content;
 
-    this.setState({content: [
-      {
-        id: Date.now,
-        type: name,
-        text: value,
-        checked: false
-      }
-    ]})
+    content[id] = {
+      id: Date.now(),
+      type: name,
+      text: value,
+      checked: false
+    };
+
+
+
+    this.setState({content})
   };
 
 // Todo: Refactor to api file
@@ -105,6 +142,8 @@ class Form extends Component {
   render() {
     // Todo: If user types in listItem, render +1 input field for list item
 
+console.log('FORM State: ', this.state)
+
     let stringInput = (
       <input
         onChange={this.handleStrChange}
@@ -121,7 +160,10 @@ class Form extends Component {
 
     return (
       <section className="Form__Container">
-        <button className="Form__changeType" onClick={this.handleTypeChange}>
+        <button
+          className="Form__changeType"
+          onClick={this.handleTypeChange}
+        >
           <i
             title="Click to change type of note"
             className="far fa-check-square"
@@ -129,14 +171,17 @@ class Form extends Component {
         </button>
         <form onSubmit={this.handleSubmit}>
           <input
+            className="Form__input-title"
             name="title"
             onChange={this.handleTitleChange}
             type="text"
             placeholder="Enter Title"
             value={this.state.title}
           />
-          {!this.state.isList && stringInput}
-          {this.state.isList && this.state.listInputs}
+          <fieldset className="Form__input-content">
+            {this.state.isList && stringInput}
+            {!this.state.isList && this.state.listInputs.map(lI => lI)}
+          </fieldset>
           <input type="submit" value="SAVE" />
         </form>
       </section>

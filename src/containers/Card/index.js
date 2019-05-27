@@ -26,11 +26,9 @@ export class Card extends Component {
 
   mapListItems = (content) => {
     return content.map(li => (
-      <p className="listItem">
-        {!li.checked 
-          && <i class="far fa-square" />}
-        {li.checked 
-          && <i class="fas fa-check-square" />}
+      <p key={li.id} className="listItem">
+        {!li.checked && <i className="far fa-square" />}
+        {li.checked && <i className="fas fa-check-square" />}
         {li.text}
       </p>
     ));
@@ -42,7 +40,7 @@ export class Card extends Component {
     const {title, content, id} = this.props
 
     if (this.state.redirect) {
-      return <Redirect to="/notes/${id}" />;
+      return <Redirect to={`/notes/${id}`} />;
     }
 
     return (
