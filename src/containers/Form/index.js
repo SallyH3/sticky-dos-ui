@@ -58,13 +58,9 @@ class Form extends Component {
     });
   };
 
-  addListInput = (e) => {
-    let {id} = e.target;
-    id = parseInt(id);
+  addListInput = () => {
+    let {listInputs} = this.state;
 
-    console.log('addList', id + 1)
-    let listInputs = this.state.listInputs;
-    console.log('before', listInputs.length)
     listInputs.push([
       <input
         key={listInputs.length}
@@ -77,18 +73,24 @@ class Form extends Component {
       <i
         key={`i-${listInputs.length}`}
         id={listInputs.length}
-        onClick={this.addListInput}
+        onClick={this.removeListInput}
         className="far fa-minus-square"
       />
     ]);
-    console.log("after", listInputs.length);
 
-    this.setState({listInputs})
+    this.setState({listInputs});
+  }
+
+  removeListInput = () => {
+    let {listInputs} = this.state
+
+    listInputs.pop();
+
+    this.setState({listInputs});
   }
 
   handleListChange = e => {
     let { name, value, id } = e.target;
-
     let content = this.state.content;
 
     content[id] = {
@@ -97,8 +99,6 @@ class Form extends Component {
       text: value,
       checked: false
     };
-
-
 
     this.setState({content})
   };
@@ -180,9 +180,9 @@ console.log('FORM State: ', this.state)
           />
           <fieldset className="Form__input-content">
             {this.state.isList && stringInput}
-            {!this.state.isList && this.state.listInputs.map(lI => lI)}
+            {!this.state.isList && this.state.listInputs.map(lI => <span>{lI}</span>)}
           </fieldset>
-          <input type="submit" value="SAVE" />
+          <input className="Form__submit" type="submit" value="SAVE" />
         </form>
       </section>
     );
