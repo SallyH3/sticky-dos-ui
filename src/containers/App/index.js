@@ -33,16 +33,17 @@ this.setState({ cardList })
   render() {
     return (
       <div className="App">
-        <Route path = '/' component = { DisplayField } />
+        <Route exact path = '/' component = { DisplayField } />
+        <Route exact path = '/new-note' component = { DisplayField } />
         <Route path = '/' component = { Header } />
         <Route exact path = '/new-note' component = { Form } />
         <Route exact path = '/notes/:id' render = {({ match }) => {
           const selectedCard = this.props.cardList.find(card => {
-            return card.cardList.id === parseInt(match.params.id)
+            return card.id === parseInt(match.params.id)
           })
           if(selectedCard) {
             return <CardDetails 
-              { ...selectedCard.cardList }
+              { ...selectedCard }
             />
           }
         }}
