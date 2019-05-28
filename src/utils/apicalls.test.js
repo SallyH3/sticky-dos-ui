@@ -1,4 +1,4 @@
-import { fetchCardList, postFetch } from './apicalls';
+import { fetchCardList, dynamicFetch } from './apicalls';
 
 describe('fetchCardList', () => {
 	let mockCardListResponse;
@@ -49,7 +49,7 @@ describe('fetchCardList', () => {
 	});
 });
 
-describe('postFetch', () => {
+describe('dynamicFetch', () => {
 	let mockCardListResponse;
 	let mockInit;
 	let mockUrl;
@@ -96,12 +96,12 @@ describe('postFetch', () => {
 	it('should be called with the correct params', () => {
 		const expectedA = mockUrl;
 		const expectedB = mockInit
-		postFetch(mockUrl, mockInit);
+		dynamicFetch(mockUrl, mockInit);
 		expect(window.fetch).toHaveBeenCalledWith(expectedA, expectedB);
 	});
 
 	it('should return a response if the status is ok', async () => {
-		const result = await postFetch();
+		const result = await dynamicFetch();
 		expect(result).toEqual(mockCardListResponse)
 	});
 
@@ -111,7 +111,7 @@ describe('postFetch', () => {
 				ok: false
 			})
 		});
-		await expect(postFetch()).rejects.toEqual(Error('Error posting data'))
+		await expect(dynamicFetch()).rejects.toEqual(Error('Error posting data'))
 	});
 
 })

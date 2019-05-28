@@ -6,10 +6,6 @@ import { setCardList } from "../../actions";
 import PropTypes from 'prop-types';
 
 export const DisplayField = (props) => {
-
-  // handleCardList = (cardList) => {
-  //   this.props.setCardList(cardList)
-  // }
   
   let displayCards = props.cardList.map(card => {
     return <Card {...card} key={card.id}/>
@@ -31,3 +27,11 @@ export const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DisplayField)
+
+DisplayField.propTypes = {
+  cardList: PropTypes.array,
+  history: PropTypes.object,
+  location: PropTypes.object,
+  match: PropTypes.object,
+  setCardList: PropTypes.func 
+}

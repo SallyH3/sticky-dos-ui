@@ -9,7 +9,7 @@ export const fetchCardList = (url) => {
 	})
 }
 
-export const postFetch = (url, init) => {
+export const dynamicFetch = (url, init) => {
 	return fetch(url, init)
 	.then(response => {
 		if(!response.ok) {

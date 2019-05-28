@@ -7,6 +7,7 @@ import { Route } from 'react-router-dom';
 import Form from '../Form';
 import CardDetails from '../../components/CardDetails';
 import { fetchCardList } from '../../utils/apicalls';
+import PropTypes from 'prop-types';
 
 export class App extends Component {
   constructor() {
@@ -42,8 +43,6 @@ this.setState({ cardList })
         <Route exact path = '/new-note' component = { Form } />
         <Route exact path = '/notes/:id' render = {({ match }) => {
           const selectedCard = this.props.cardList.find(card => {
-            console.log('breaking?? Card',card)
-            console.log('breaking?? MAtch', match.params.id)
             return card.id === parseInt(match.params.id)
           })
           if(selectedCard) {
@@ -69,3 +68,8 @@ export const mapDispatchToProps = (dispatch) => ({
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
+
+App.propTypes = {
+  cardList: PropTypes.array,
+  setCardList: PropTypes.func
+}

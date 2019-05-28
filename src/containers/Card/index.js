@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { deleteCard } from '../../actions';
 import { Redirect } from 'react-router-dom';
+import PropTypes  from 'prop-types';
 
 export class Card extends Component {
   constructor() {
@@ -12,11 +13,11 @@ export class Card extends Component {
   }
 
   handleClick = () => {
-    this.deleteCard(this.props.id)
+    this.handleDeleteCard(this.props.id)
 
   }
 
-  deleteCard = (id) => {
+  handleDeleteCard = (id) => {
     const url = `http://localhost:3001/api/v1/cardList/${id}`
     fetch(url, {
       method: 'DELETE'
@@ -38,7 +39,6 @@ export class Card extends Component {
 
   render() {
     const {title, content, id} = this.props
-    console.log('this is content', content)
     if (this.state.redirect) {
       return <Redirect to={`/notes/${id}`} />;
     }
@@ -69,4 +69,12 @@ export const mapDispatchToProps =(dispatch) => ({
   deleteCard: (id) => dispatch(deleteCard(id))
 })
 
-export default connect(null, mapDispatchToProps)(Card)
+export default connect(null, mapDispatchToProps)(Card);
+
+
+Card.propTypes = {
+  content: PropTypes.array,
+  deleteCard:PropTypes.func,
+  id: PropTypes.number,
+  title: PropTypes.string 
+}

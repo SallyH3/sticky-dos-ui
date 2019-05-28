@@ -3,19 +3,7 @@ import { shallow } from 'enzyme';
 import { DisplayField, mapStateToProps } from './index.js';
 import Card from '../../containers/Card';
 import { cardList } from '../../actions';
-
-const mockCardList = [
-  {
-    id: 1,
-    title: 'test',
-    content: 'hello world'
-  },
-  {
-    id: 2,
-    title: 'test2',
-    content: 'helloooo world' 
-  }
-]
+import { mockCardList } from '../../utils/mockData.js';
 
 describe('DisplayField', () => {
   let wrapper;
@@ -27,6 +15,22 @@ describe('DisplayField', () => {
   })
 
   it('should match snapshot', () => {
-    expect(wrapper).toMatchSnapshot()
-  })
-})
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  describe('mapStateToProps', () => {
+
+  	it('should return a cardList array', () => {
+  		const mockState = {
+  			cardList: mockCardList
+  		}
+  		const expected = {
+  			cardList: mockState.cardList
+  		}
+  		const mappedProps = mapStateToProps(mockState)
+
+  		expect(mappedProps).toEqual(expected)
+  	});
+  });
+});
+
