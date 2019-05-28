@@ -29,7 +29,7 @@ exports[`Form should match snapshot 1`] = `
       className="Form__input-content"
     >
       <span
-        key="1559079395176"
+        key="1559081534053"
       >
         <input
           id="0"
