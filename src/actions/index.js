@@ -7,3 +7,8 @@ export const deleteCard = (id) => ({
 	type: 'DELETE_CARD',
 	id
 })
+
+export const updateCard = (card) => ({
+  type: 'UPDATE_CARD',
+  card
+})

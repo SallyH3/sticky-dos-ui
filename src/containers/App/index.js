@@ -31,6 +31,9 @@ this.setState({ cardList })
 }
 
   render() {
+
+    console.log('maybe', this.props.cardList)
+
     return (
       <div className="App">
         <Route exact path = '/' component = { DisplayField } />
@@ -39,6 +42,8 @@ this.setState({ cardList })
         <Route exact path = '/new-note' component = { Form } />
         <Route exact path = '/notes/:id' render = {({ match }) => {
           const selectedCard = this.props.cardList.find(card => {
+            console.log('breaking?? Card',card)
+            console.log('breaking?? MAtch', match.params.id)
             return card.id === parseInt(match.params.id)
           })
           if(selectedCard) {

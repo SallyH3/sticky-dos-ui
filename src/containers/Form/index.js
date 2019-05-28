@@ -9,6 +9,7 @@ class Form extends Component {
     super(props);
     this.state = {
       redirect: false,
+      id: Date.now(),
       title: "",
       content: [{}],
       isList: false,
@@ -105,11 +106,12 @@ class Form extends Component {
 
 // Todo: Refactor to api file
   buildInit = () => {
-    const { title, content } = this.state;
+    const { id, title, content } = this.state;
     return {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
+        id,
         title,
         content
       })
@@ -117,10 +119,10 @@ class Form extends Component {
   };
 
   storeCard = () => {
-    let {title, content} = this.state;
+    let {id, title, content} = this.state;
     let {cardList} = this.props;
 
-    let newCardList = [...cardList, {title, content}];
+    let newCardList = [...cardList, {id, title, content}];
     this.props.setCardList(newCardList);
   };
 

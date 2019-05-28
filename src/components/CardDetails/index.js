@@ -2,21 +2,24 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import './_CardDetails.scss'
-import Header from '../Header';
-import { deleteCard } from '../../actions';
+import { deleteCard, updateCard } from '../../actions';
+import {postFetch} from '../../utils/apicalls';
   
 export class CardDetails extends Component {
-  constructor() {
-    super();
-    this.state={
+  constructor(props) {
+    super(props);
+    this.state = {
       edit: false,
-      redirect: false
-    }
+      redirect: false,
+      updatedCard: {
+        title: this.props.title,
+        id: this.props.id,
+        content: this.props.content 
+      }
+    };
   }
   
   handleClick = () => {
-    console.log('DELETE')
-    // this.props.deleteCard(id)
     this.setState({ redirect: true });
   }
 
@@ -27,33 +30,83 @@ export class CardDetails extends Component {
     })
     this.props.deleteCard(id)
   };
-  
-  handleEdit = () => {
-    console.log(this.props.id)
-    if (this.state.edit === true) {
-      this.setState({edit: false})
-    } else {
-      this.setState({edit: true})
-    }
+
+  handleTitleChange = (e) => {
+    let {value} = e.target;
+    let updatedCard = this.state.updatedCard;
+
+    updatedCard.title = value;
+
+    this.setState({updatedCard});
   }
   
   handleCheck = (li) => {
-    console.log(li)
+    let status = li.checked;
+
+    let updatedCard = this.state.updatedCard;
+    updatedCard.content.map(item => {
+      if (li.id == item.id) {
+        item.checked = !status;
+      }
+    })
+
+    this.setState({updatedCard});
+  }
+
+  handleLIChange = (e, li) => {
+    let {value} = e.target;
+    let updatedCard = this.state.updatedCard;
+
+    updatedCard.content.map(item => {
+      if (li.id == item.id) {
+        return li.text = value;
+      }
+    });
+
+    this.setState({updatedCard})
   }
   
   mapListItems = (content) => {
-    let uncheck = <i className="far fa-square" />
-    let check = <i className="fas fa-check-square" />
     console.log(content)
-    return content.map(li => (
-      <p>
-        {!li.checked 
-          && <button onClick={this.handleCheck} className='check-btn'> {uncheck} </button>}
-        {li.checked 
-          && <button onClick={this.handleCheck} className='check-btn'> {check} </button>}
-        {li.text}</p>
 
+    return content.map(li => (
+      <fieldset>
+        {!li.checked && (
+          <i
+            className="far check-btn  fa-square"
+            onClick={() => this.handleCheck(li)}
+          />
+        )}
+        {li.checked && (
+          <i
+            className="fas check-btn fa-check-square"
+            onClick={() => this.handleCheck(li)}
+          />
+        )}
+        <input type="text" value={li.text} onChange={(e) => this.handleLIChange(e, li)} />
+      </fieldset>
     ));
+  }
+
+  buildInit = () => {
+
+    console.log('built w/', this.state.updatedCard)
+
+    return {
+      method: 'PUT',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(this.state.updatedCard)
+    }
+  }
+
+  handleSave = (e, id) => {
+    e.preventDefault();
+    let URL = `http://localhost:3001/api/v1/cardList/${id}`;
+    let init = this.buildInit();
+
+    postFetch(URL, init)
+    console.log('inSAVE', this.state.updatedCard)
+    this.props.updateCard(this.state.updatedCard)
   }
   
   render() {
@@ -61,54 +114,42 @@ export class CardDetails extends Component {
     console.log('detailSTATE', this.state)
 
     if (this.state.redirect) {
-      console.log('Is it triggering')
       this.deleteCard(this.props.id);
       return <Redirect to="/" />;
     }
 
-    const canNotEdit =  
-      <article className="big-card">
-        <section className="Card__header">
-          <h4>{title}</h4>
-          <button onClick={this.handleClick} className="Card__trash">X</button>
-          <button onClick={this.handleEdit}>Edit</button>
-        </section>
-        <div className="content">
-          {content[0].type === "list" && this.mapListItems(content)}
-        </div>
-      </article>
-    const canEdit =         
-      <article className="big-card">
-        <section className="Card__header">
-          <input className='title' placeholder={title} />
-          <button onClick={this.handleClick} className="Card__trash">X</button>
-          <button onClick={this.handleEdit}>Save</button>
-        </section>
-        <div className="content">
-          {content[0].type === "list" && this.mapListItems(content)}
-        </div>
-      </article>
-      console.log('this is content', content)
-      console.log('checkmarks', content[0].checked)
-      const display = this.state.edit ? canEdit : canNotEdit;
-
-      return(
-        <div>
-          <Header />
-          <main>
-            {display}
-          </main>
-        </div>
-      )
+      return (
+        <article className="big-card">
+          <form>
+            <fieldset className="Card__header">
+              <input 
+                type="text" 
+                className="title" 
+                placeholder={title} 
+                value={this.state.updatedCard.title} 
+                onChange={this.handleTitleChange} 
+              />
+              <button onClick={this.handleClick} className="Card__trash">
+                X
+              </button>
+              <input type="submit" onClick={(e) => this.handleSave(e, id)} />
+            </fieldset>
+            <fieldset className="content">
+              {content[0].type === "list" && this.mapListItems(content)}
+            </fieldset>
+          </form>
+        </article>
+      );
     }
   } 
   
-export const mapStateToProps = (state) => ({
-  cardList: state.cardList
-})
+// export const mapStateToProps = (state) => ({
+//   // cardList: state.cardList
+// })
 
 export const mapDispatchToProps =(dispatch) => ({
-  deleteCard: (id) => dispatch(deleteCard(id))
+  deleteCard: (id) => dispatch(deleteCard(id)),
+  updateCard: (card) => dispatch(updateCard(card))
 })
 
-export default connect(mapStateToProps,mapDispatchToProps)(CardDetails);
+export default connect(null, mapDispatchToProps)(CardDetails);
