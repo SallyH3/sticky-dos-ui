@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import './_CardDetails.scss'
-import { deleteCard } from '../../actions';
+import { deleteCard, updateCard } from '../../actions';
 import {postFetch} from '../../utils/apicalls';
   
 export class CardDetails extends Component {
@@ -11,13 +11,15 @@ export class CardDetails extends Component {
     this.state = {
       edit: false,
       redirect: false,
-      updatedCard: {...this.props}
+      updatedCard: {
+        title: this.props.title,
+        id: this.props.id,
+        content: this.props.content 
+      }
     };
   }
   
   handleClick = () => {
-    console.log('DELETE')
-    // this.props.deleteCard(id)
     this.setState({ redirect: true });
   }
 
@@ -28,21 +30,40 @@ export class CardDetails extends Component {
     })
     this.props.deleteCard(id)
   };
+
+  handleTitleChange = (e) => {
+    let {value} = e.target;
+    let updatedCard = this.state.updatedCard;
+
+    updatedCard.title = value;
+
+    this.setState({updatedCard});
+  }
   
   handleCheck = (li) => {
-    console.log('li ID', li.id)
     let status = li.checked;
-    status = !status;
 
     let updatedCard = this.state.updatedCard;
     updatedCard.content.map(item => {
-      console.log('in map',item.id)
       if (li.id == item.id) {
-        item.checked = status;
+        item.checked = !status;
       }
     })
 
     this.setState({updatedCard});
+  }
+
+  handleLIChange = (e, li) => {
+    let {value} = e.target;
+    let updatedCard = this.state.updatedCard;
+
+    updatedCard.content.map(item => {
+      if (li.id == item.id) {
+        return li.text = value;
+      }
+    });
+
+    this.setState({updatedCard})
   }
   
   mapListItems = (content) => {
@@ -62,7 +83,7 @@ export class CardDetails extends Component {
             onClick={() => this.handleCheck(li)}
           />
         )}
-        <input type="text" value={li.text} />
+        <input type="text" value={li.text} onChange={(e) => this.handleLIChange(e, li)} />
       </fieldset>
     ));
   }
@@ -83,9 +104,9 @@ export class CardDetails extends Component {
     let URL = `http://localhost:3001/api/v1/cardList/${id}`;
     let init = this.buildInit();
 
-    console.log('I wanna post', init);
-
     postFetch(URL, init)
+    console.log('inSAVE', this.state.updatedCard)
+    this.props.updateCard(this.state.updatedCard)
   }
   
   render() {
@@ -93,26 +114,29 @@ export class CardDetails extends Component {
     console.log('detailSTATE', this.state)
 
     if (this.state.redirect) {
-      console.log('Is it triggering')
       this.deleteCard(this.props.id);
       return <Redirect to="/" />;
-    }       
-      
-      console.log('checkmarks', content[0].checked)
+    }
 
       return (
         <article className="big-card">
           <form>
             <fieldset className="Card__header">
-              <input className="title" value={title} />
+              <input 
+                type="text" 
+                className="title" 
+                placeholder={title} 
+                value={this.state.updatedCard.title} 
+                onChange={this.handleTitleChange} 
+              />
               <button onClick={this.handleClick} className="Card__trash">
                 X
               </button>
               <input type="submit" onClick={(e) => this.handleSave(e, id)} />
             </fieldset>
-            <div className="content">
+            <fieldset className="content">
               {content[0].type === "list" && this.mapListItems(content)}
-            </div>
+            </fieldset>
           </form>
         </article>
       );
@@ -124,7 +148,8 @@ export class CardDetails extends Component {
 // })
 
 export const mapDispatchToProps =(dispatch) => ({
-  deleteCard: (id) => dispatch(deleteCard(id))
+  deleteCard: (id) => dispatch(deleteCard(id)),
+  updateCard: (card) => dispatch(updateCard(card))
 })
 
 export default connect(null, mapDispatchToProps)(CardDetails);
