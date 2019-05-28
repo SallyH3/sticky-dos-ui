@@ -15,6 +15,23 @@ describe('DisplayField', () => {
   })
 
   it('should match snapshot', () => {
-    expect(wrapper).toMatchSnapshot()
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  describe('mapStateToProps', () => {
+
+  	it('should return a cardList array', () => {
+  		const mockState = {
+  			cardList: mockCardList
+  		}
+  		const expected = {
+  			cardList: mockState.cardList
+  		}
+
+  		const mappedProps = mapStateToProps(mockState)
+
+  		expect(mappedProps).toEqual(expected)
+  	})
   })
-})
+});
+
