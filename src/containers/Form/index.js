@@ -68,6 +68,7 @@ class Form extends Component {
         id={listInputs.length}
         onChange={this.handleListChange}
         name="list"
+        maxLength="50"
         type="text"
         placeholder="Enter List Item"
       />,
@@ -143,15 +144,12 @@ class Form extends Component {
   };
 
   render() {
-    // Todo: If user types in listItem, render +1 input field for list item
-
-console.log('FORM State: ', this.state)
-
     let stringInput = (
       <input
         onChange={this.handleStrChange}
         name="note"
         type="text"
+        maxLength="250"
         value={this.state.content[0].text}
         placeholder="Enter Body"
       />
@@ -179,6 +177,7 @@ console.log('FORM State: ', this.state)
             onChange={this.handleTitleChange}
             type="text"
             placeholder="Enter Title"
+            maxLength="50"
             value={this.state.title}
           />
           <fieldset className="Form__input-content">

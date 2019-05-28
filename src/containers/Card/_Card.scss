@@ -1,0 +1,51 @@
+.Card {
+  box-sizing: border-box;
+  max-height: 60vh;
+
+  h4 {
+    margin: none;
+  }
+
+  button {
+    background: none;
+    border: none;
+    height: 10px;
+  }
+
+    .content {
+      i {
+        margin-right: 10px;
+      }
+    }
+}
+
+.Card__top {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+  padding: 10px 0 0 25px;
+  max-height: 25%;
+  width: 100%;
+  
+  h4 {
+    display: flex;
+    align-items: center;
+    margin: none;
+    height: 95%;
+    width: 75%;
+    overflow-y: scroll;
+  }
+}
+
+.Card__Btns {
+  width: 5%;
+  display: flex;
+  justify-content: space-between;
+
+    button {
+      font-size: 16px;
+      padding-bottom: 20px;
+    }
+}

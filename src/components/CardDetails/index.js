@@ -67,10 +67,8 @@ export class CardDetails extends Component {
   }
   
   mapListItems = (content) => {
-    console.log(content)
-
     return content.map(li => (
-      <fieldset>
+      <fieldset className="f-li">
         {!li.checked && (
           <i
             className="far check-btn  fa-square"
@@ -89,9 +87,6 @@ export class CardDetails extends Component {
   }
 
   buildInit = () => {
-
-    console.log('built w/', this.state.updatedCard)
-
     return {
       method: 'PUT',
       headers: {'Content-Type': 'application/json'},
@@ -105,13 +100,11 @@ export class CardDetails extends Component {
     let init = this.buildInit();
 
     postFetch(URL, init)
-    console.log('inSAVE', this.state.updatedCard)
     this.props.updateCard(this.state.updatedCard)
   }
   
   render() {
     const { title, content, id } = this.props;
-    console.log('detailSTATE', this.state)
 
     if (this.state.redirect) {
       this.deleteCard(this.props.id);
@@ -129,10 +122,10 @@ export class CardDetails extends Component {
                 value={this.state.updatedCard.title} 
                 onChange={this.handleTitleChange} 
               />
+              <input className="Card__save" type="submit" onClick={(e) => this.handleSave(e, id)} />
               <button onClick={this.handleClick} className="Card__trash">
-                X
+                <i class="far fa-trash-alt"></i>
               </button>
-              <input type="submit" onClick={(e) => this.handleSave(e, id)} />
             </fieldset>
             <fieldset className="content">
               {content[0].type === "list" && this.mapListItems(content)}
@@ -142,10 +135,6 @@ export class CardDetails extends Component {
       );
     }
   } 
-  
-// export const mapStateToProps = (state) => ({
-//   // cardList: state.cardList
-// })
 
 export const mapDispatchToProps =(dispatch) => ({
   deleteCard: (id) => dispatch(deleteCard(id)),
