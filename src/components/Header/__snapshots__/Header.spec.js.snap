@@ -1,3 +1,30 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Header should match snapshot 1`] = `ShallowWrapper {}`;
+exports[`Header should match snapshot 1`] = `
+<header>
+  <section
+    className="header__title"
+  >
+    <NavLink
+      to="/"
+    >
+      <img
+        alt="Sticky Do's Logo"
+        src="Sticky-Note.svg"
+      />
+    </NavLink>
+    <h1>
+      Sticky Do's
+    </h1>
+  </section>
+  <section
+    className="Nav-to-Form"
+  >
+    <NavLink
+      to="/new-note"
+    >
+      Take a Note...
+    </NavLink>
+  </section>
+</header>
+`;

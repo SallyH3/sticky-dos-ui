@@ -6,12 +6,14 @@ import { cardList } from '../../actions';
 
 const mockCardList = [
   {
+    id: 1,
     title: 'test',
     content: 'hello world'
   },
   {
-   title: 'test2',
-   content: 'helloooo world' 
+    id: 2,
+    title: 'test2',
+    content: 'helloooo world' 
   }
 ]
 
