@@ -10,16 +10,16 @@ const handleClick = jest.fn();
 
 describe('Card', () => {
   let wrapper;
-  let deleteCard;
+  let mockDeleteCard;
 
   beforeEach(() => {
-    deleteCard =jest.fn();
+    mockDeleteCard =jest.fn();
     wrapper = shallow(
       <Card 
         title={mockCardList[0].title}
         id={mockCardList[0].id}
         content={mockCardList[0].content}
-        deleteCard={deleteCard}
+        deleteCard={mockDeleteCard}
       />
     )
   })
@@ -41,7 +41,20 @@ describe('Card', () => {
 
   it('should handleClick', () => {
     wrapper.instance().handleClick();
-    expect(deleteCard).toHaveBeenCalledWith(mockCardList[0].id);
+    expect(mockDeleteCard).toHaveBeenCalledWith(mockCardList[0].id);
   });
 
-})
+  describe('mapDispatchToProps', () => {
+
+    it('should call dispatch when using a function from MDTP', () => {
+      const mockDispatch = jest.fn();
+      const actionToDispatch = deleteCard(0);
+
+      const mappedProps = mapDispatchToProps(mockDispatch);
+      mappedProps.deleteCard(0);
+
+      expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+    });
+  });
+
+});
