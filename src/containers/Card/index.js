@@ -12,11 +12,11 @@ export class Card extends Component {
   }
 
   handleClick = () => {
-    this.deleteCard(this.props.id)
+    this.handleDeleteCard(this.props.id)
 
   }
 
-  deleteCard = (id) => {
+  handleDeleteCard = (id) => {
     const url = `http://localhost:3001/api/v1/cardList/${id}`
     fetch(url, {
       method: 'DELETE'
@@ -38,7 +38,6 @@ export class Card extends Component {
 
   render() {
     const {title, content, id} = this.props
-    console.log('this is content', content)
     if (this.state.redirect) {
       return <Redirect to={`/notes/${id}`} />;
     }

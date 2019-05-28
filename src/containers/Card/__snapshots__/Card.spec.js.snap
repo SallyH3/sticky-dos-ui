@@ -1,3 +1,96 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Card should match snapshot 1`] = `ShallowWrapper {}`;
+exports[`Card should match snapshot for list item 1`] = `
+<article
+  className="Card"
+>
+  <section
+    className="Card__top"
+  >
+    <h4>
+      Example #2
+    </h4>
+    <span
+      className="Card__Btns"
+    >
+      <button
+        onClick={[Function]}
+      >
+        <i
+          className="fas fa-edit"
+        />
+      </button>
+      <button
+        className="Card__trash"
+        onClick={[Function]}
+      >
+        <i
+          className="far fa-trash-alt"
+        />
+      </button>
+    </span>
+  </section>
+  <div
+    className="content"
+  >
+    <p
+      className="listItem"
+      key="1"
+    >
+      <i
+        className="far fa-square"
+      />
+      This is a list item. If you click the ☑️ button in the input box
+    </p>
+    <p
+      className="listItem"
+      key="2"
+    >
+      <i
+        className="fas fa-check-square"
+      />
+      You can add as many checkList items as you would like!
+    </p>
+  </div>
+</article>
+`;
+
+exports[`Card should match snapshot for note item 1`] = `
+<article
+  className="Card"
+>
+  <section
+    className="Card__top"
+  >
+    <h4>
+      Welcome to Sticky Do's
+    </h4>
+    <span
+      className="Card__Btns"
+    >
+      <button
+        onClick={[Function]}
+      >
+        <i
+          className="fas fa-edit"
+        />
+      </button>
+      <button
+        className="Card__trash"
+        onClick={[Function]}
+      >
+        <i
+          className="far fa-trash-alt"
+        />
+      </button>
+    </span>
+  </section>
+  <div
+    className="content"
+  >
+    <p>
+      This is a standard note. Which is the default when you start typing in our input box ⤴️
+    </p>
+  </div>
+</article>
+`;

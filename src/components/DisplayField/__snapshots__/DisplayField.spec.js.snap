@@ -5,16 +5,40 @@ exports[`DisplayField should match snapshot 1`] = `
   className="DisplayField"
 >
   <Connect(Card)
-    content="hello world"
-    id={1}
-    key="1"
-    title="test"
+    content={
+      Array [
+        Object {
+          "checked": null,
+          "id": 1,
+          "text": "This is a standard note. Which is the default when you start typing in our input box ⤴️",
+          "type": "note",
+        },
+      ]
+    }
+    id={0}
+    key="0"
+    title="Welcome to Sticky Do's"
   />
   <Connect(Card)
-    content="helloooo world"
+    content={
+      Array [
+        Object {
+          "checked": false,
+          "id": 1,
+          "text": "This is a list item. If you click the ☑️ button in the input box",
+          "type": "list",
+        },
+        Object {
+          "checked": true,
+          "id": 2,
+          "text": "You can add as many checkList items as you would like!",
+          "type": "list",
+        },
+      ]
+    }
     id={2}
     key="2"
-    title="test2"
+    title="Example #2"
   />
 </main>
 `;
