@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import './_CardDetails.scss'
 import { deleteCard, updateCard } from '../../actions';
-import {postFetch} from '../../utils/apicalls';
+import {dynamicFetch} from '../../utils/apicalls';
 import PropTypes from 'prop-types';
 
   
@@ -102,7 +102,7 @@ export class CardDetails extends Component {
     let URL = `http://localhost:3001/api/v1/cardList/${id}`;
     let init = this.buildInit();
 
-    postFetch(URL, init)
+    dynamicFetch(URL, init)
     this.props.updateCard(this.state.updatedCard)
   }
   

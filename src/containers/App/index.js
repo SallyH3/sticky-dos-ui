@@ -7,6 +7,7 @@ import { Route } from 'react-router-dom';
 import Form from '../Form';
 import CardDetails from '../../components/CardDetails';
 import { fetchCardList } from '../../utils/apicalls';
+import PropTypes from 'prop-types';
 
 export class App extends Component {
   constructor() {
@@ -67,3 +68,8 @@ export const mapDispatchToProps = (dispatch) => ({
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
+
+App.propTypes = {
+  cardList: PropTypes.array,
+  setCardList: PropTypes.func
+}

@@ -2,9 +2,10 @@ import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom';
 import { connect } from "react-redux";
 import { setCardList } from "../../actions";
-import { postFetch } from '../../utils/apicalls';
+import { dynamicFetch } from '../../utils/apicalls';
+import PropTypes from 'prop-types';
 
-class Form extends Component {
+export class Form extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -131,7 +132,7 @@ class Form extends Component {
     let init = this.buildInit();
     let url = "http://localhost:3001/api/v1/cardList";
 
-    postFetch(url, init)
+    dynamicFetch(url, init)
       .then(result => this.storeCard(result))
       
   };
@@ -182,7 +183,7 @@ class Form extends Component {
           />
           <fieldset className="Form__input-content">
             {this.state.isList && stringInput}
-            {!this.state.isList && this.state.listInputs.map(lI => <span>{lI}</span>)}
+            {!this.state.isList && this.state.listInputs.map(lI => <span key={this.state.id}>{lI}</span>)}
           </fieldset>
           <input className="Form__submit" type="submit" value="SAVE" />
         </form>
@@ -200,3 +201,11 @@ export const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Form);
+
+Form.propTypes= {
+  cardList: PropTypes.array,
+  history: PropTypes.object,
+  location: PropTypes.object,
+  match: PropTypes.object,
+  setCardList: PropTypes.func
+}

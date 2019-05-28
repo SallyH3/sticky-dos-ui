@@ -3,6 +3,7 @@ import { shallow } from 'enzyme';
 import { CardDetails, mapDispatchToProps } from './index.js';
 import { deleteCard, updateCard } from '../../actions';
 import { mockCardList } from '../../utils/mockData';
+import { dynamicFetch } from '../../utils/apicalls.js';
 
 let mockCard = mockCardList[1];
 let mockState = {
@@ -96,6 +97,17 @@ describe('CardDetails', () => {
   	// wrapper.find(".Card__trash").simulate('click');
   	wrapper.instance().handleDeleteCard();
   	expect(deleteCard).toHaveBeenCalled();
+  });
+
+  it('should handle save', () => {
+    const mockEvent = { target: {} }
+    const dynamicFetch = jest.fn();
+
+    expectedCard.content[0].text = 'hello world';
+    expect(wrapper.state()).toEqual(mockState);
+    wrapper.instance().handleSave(
+     { preventDefault: () => {} } , content[0]);
+    expect(dynamicFetch).toHaveBeenCalled();
   });
 
     describe('mapDispatchToProps', () => {

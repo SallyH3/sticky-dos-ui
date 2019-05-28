@@ -1,3 +1,57 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Form should match snapshot 1`] = `undefined`;
+exports[`Form should match snapshot 1`] = `
+<section
+  className="Form__Container"
+>
+  <button
+    className="Form__changeType"
+    onClick={[Function]}
+  >
+    <i
+      className="far fa-check-square"
+      title="Click to change type of note"
+    />
+  </button>
+  <form
+    onSubmit={[Function]}
+  >
+    <input
+      className="Form__input-title"
+      maxLength="50"
+      name="title"
+      onChange={[Function]}
+      placeholder="Enter Title"
+      type="text"
+      value=""
+    />
+    <fieldset
+      className="Form__input-content"
+    >
+      <span
+        key="1559079395176"
+      >
+        <input
+          id="0"
+          key="0"
+          name="list"
+          onChange={[Function]}
+          placeholder="Enter List Item"
+          type="text"
+        />
+        <i
+          className="far fa-plus-square"
+          id="0"
+          key="i-0"
+          onClick={[Function]}
+        />
+      </span>
+    </fieldset>
+    <input
+      className="Form__submit"
+      type="submit"
+      value="SAVE"
+    />
+  </form>
+</section>
+`;
