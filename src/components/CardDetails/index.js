@@ -4,12 +4,13 @@ import { Redirect } from 'react-router-dom';
 import './_CardDetails.scss'
 import { deleteCard, updateCard } from '../../actions';
 import {postFetch} from '../../utils/apicalls';
+import PropTypes from 'prop-types';
+
   
 export class CardDetails extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      edit: false,
       redirect: false,
       updatedCard: {
         title: this.props.title,
@@ -23,7 +24,7 @@ export class CardDetails extends Component {
     this.setState({ redirect: true });
   }
 
-  deleteCard = (id) => {
+  handleDeleteCard = (id) => {
     const url = `http://localhost:3001/api/v1/cardList/${id}`
     fetch(url, {
       method: 'DELETE'
@@ -68,20 +69,22 @@ export class CardDetails extends Component {
   
   mapListItems = (content) => {
     return content.map(li => (
-      <fieldset className="f-li">
+      <fieldset className="f-li" key={li.id}>
         {!li.checked && (
-          <i
+          <i 
+            id={"check"+li.id}
             className="far check-btn  fa-square"
             onClick={() => this.handleCheck(li)}
           />
         )}
         {li.checked && (
           <i
+            id={"check"+li.id}
             className="fas check-btn fa-check-square"
             onClick={() => this.handleCheck(li)}
           />
         )}
-        <input type="text" value={li.text} onChange={(e) => this.handleLIChange(e, li)} />
+        <input id={"input"+li.id} type="text" value={li.text} onChange={(e) => this.handleLIChange(e, li)} />
       </fieldset>
     ));
   }
@@ -107,7 +110,7 @@ export class CardDetails extends Component {
     const { title, content, id } = this.props;
 
     if (this.state.redirect) {
-      this.deleteCard(this.props.id);
+      this.handleDeleteCard(this.props.id);
       return <Redirect to="/" />;
     }
 
@@ -142,3 +145,11 @@ export const mapDispatchToProps =(dispatch) => ({
 })
 
 export default connect(null, mapDispatchToProps)(CardDetails);
+
+CardDetails.propTypes = {
+  content: PropTypes.array,
+  deleteCard: PropTypes.func,
+  id: PropTypes.number,
+  title: PropTypes.string,
+  updateCard: PropTypes.func
+}

@@ -5,7 +5,6 @@ import { cardList, deleteCard } from '../../actions';
 import { NavLink } from 'react-router-dom';
 import { mockCardList } from '../../utils/mockData.js';
 
-const handleDeleteCard = jest.fn();
 const handleClick = jest.fn();
 
 describe('Card', () => {

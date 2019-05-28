@@ -1,3 +1,70 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CardDetails should match snapshot 1`] = `undefined`;
+exports[`CardDetails should match snapshot 1`] = `
+<article
+  className="big-card"
+>
+  <form>
+    <fieldset
+      className="Card__header"
+    >
+      <input
+        className="title"
+        onChange={[Function]}
+        placeholder="Example #2"
+        type="text"
+        value="Example #2"
+      />
+      <input
+        className="Card__save"
+        onClick={[Function]}
+        type="submit"
+      />
+      <button
+        className="Card__trash"
+        onClick={[Function]}
+      >
+        <i
+          class="far fa-trash-alt"
+        />
+      </button>
+    </fieldset>
+    <fieldset
+      className="content"
+    >
+      <fieldset
+        className="f-li"
+        key="1"
+      >
+        <i
+          className="far check-btn  fa-square"
+          id="check1"
+          onClick={[Function]}
+        />
+        <input
+          id="input1"
+          onChange={[Function]}
+          type="text"
+          value="This is a list item. If you click the ☑️ button in the input box"
+        />
+      </fieldset>
+      <fieldset
+        className="f-li"
+        key="2"
+      >
+        <i
+          className="fas check-btn fa-check-square"
+          id="check2"
+          onClick={[Function]}
+        />
+        <input
+          id="input2"
+          onChange={[Function]}
+          type="text"
+          value="You can add as many checkList items as you would like!"
+        />
+      </fieldset>
+    </fieldset>
+  </form>
+</article>
+`;

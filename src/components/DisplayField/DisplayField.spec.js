@@ -27,11 +27,10 @@ describe('DisplayField', () => {
   		const expected = {
   			cardList: mockState.cardList
   		}
-
   		const mappedProps = mapStateToProps(mockState)
 
   		expect(mappedProps).toEqual(expected)
-  	})
-  })
+  	});
+  });
 });
 
