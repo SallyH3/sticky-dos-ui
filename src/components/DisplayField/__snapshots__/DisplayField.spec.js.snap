@@ -1,3 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`DisplayField should match snapshot 1`] = `ShallowWrapper {}`;
+exports[`DisplayField should match snapshot 1`] = `
+<main
+  className="DisplayField"
+>
+  <Connect(Card)
+    content="hello world"
+    id={1}
+    key="1"
+    title="test"
+  />
+  <Connect(Card)
+    content="helloooo world"
+    id={2}
+    key="2"
+    title="test2"
+  />
+</main>
+`;

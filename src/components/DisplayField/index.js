@@ -3,27 +3,23 @@ import Card from '../../containers/Card';
 import { connect } from 'react-redux'; 
 import {fetchCardList} from '../../utils/apicalls';
 import { setCardList } from "../../actions";
+import PropTypes from 'prop-types';
 
-export class DisplayField extends Component {
-  constructor(props) {
-    super(props)
+export const DisplayField = (props) => {
 
-  }
-
-  handleCardList = (cardList) => {
-    this.props.setCardList(cardList)
-  }
+  // handleCardList = (cardList) => {
+  //   this.props.setCardList(cardList)
+  // }
   
-  render() {
-    let displayCards = this.props.cardList.map(card => {
-      return <Card {...card} key={card.id}/>
-    })
-    return (
-      <main className="DisplayField">
-        {displayCards}
-      </main>
-    );
-  }
+  let displayCards = props.cardList.map(card => {
+    return <Card {...card} key={card.id}/>
+  })
+  
+  return (
+    <main className="DisplayField">
+      {displayCards}
+    </main>
+  );
 }
 
 export const mapStateToProps = (state) => ({
