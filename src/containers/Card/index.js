@@ -45,14 +45,16 @@ export class Card extends Component {
 
     return (
       <article className="Card">
-        <button onClick={()=> this.setState({redirect: true})}>
-          <i className="fas fa-edit" />
-        </button>
-        <button onClick={this.handleClick} className="Card__trash">
-          <i className="fas fa-trash" />
-        </button>
-          <section className="Card__header">
+          <section className="Card__top">
             <h4>{title}</h4>
+            <span className="Card__Btns">
+              <button onClick={()=> this.setState({redirect: true})}>
+                <i className="fas fa-edit" />
+              </button>
+              <button onClick={this.handleClick} className="Card__trash">
+                <i className="far fa-trash-alt" />
+              </button>
+            </span>
           </section>
           <div className="content">
             {content[0].type === "note" && <p>{content[0].text}</p>}

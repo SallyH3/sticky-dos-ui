@@ -1,14 +1,93 @@
 .big-card {
   position: absolute;
+  padding: 20px;
   top: 35%;
   left: 30%;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   width: 30%;
   height: min(40%);
+  max-height: 60%;
   margin-bottom: min(4%);
   margin-left: min(4%);
   background: #E5E5E5;
   border-radius: 10px;
   box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.45);
+
+    .content {
+      box-sizing: border-box;
+      margin-top: 20px;
+      padding: 10px;
+      overflow: scroll;
+      height: 73%;
+      background-color: #C4C4C4;
+      box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+      border: none;
+    }
+}
+
+.Card__header {
+  box-sizing: border-box;
+  border: none;
+  padding-top: 10px;
+  margin-bottom: 5px;
+  border-bottom: lightgray 2px ridge;
+
+    input {
+      display: inline-block;
+      margin: 0;
+      background: none;
+      border: none;
+      font-size: 22px;
+
+        &:hover {
+          color: cornflowerblue;
+        }
+    }
+
+    .Card__save {
+      &:hover {
+        cursor: pointer;
+        text-decoration: underline;
+      }
+    }
+
+    button {
+      background: none;
+      border: none;
+      font-size: 22px;
+      margin-left: 30px;
+
+        &:hover {
+          color: cornflowerblue;
+          cursor: pointer;
+        }
+    }
+}
+
+.f-li {
+  box-sizing: border-box;
+  padding: 2.5%;
+  border: none;
+  border-bottom: 2px ridge lightgray;
+
+    i {
+      margin-right: 20px;
+
+        &:hover {
+          color: cornflowerblue;
+        }
+    };
+
+    input {
+      border: none;
+      background: none;
+      font-size: 16px;
+      width: 90%;
+
+      &:hover {
+        color: cornflowerblue;
+      }
+    }
 }
