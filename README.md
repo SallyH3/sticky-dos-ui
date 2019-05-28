@@ -25,7 +25,8 @@ npm test
 
 ## Wireframes and photos of project:
 
-...coming soon!
+- Wireframe
+<img width="1001" alt="image" src="https://user-images.githubusercontent.com/23123990/58515713-eb8a5380-8162-11e9-8d0c-d0533cbf875c.png">
 
 
 ## Technologies used:
