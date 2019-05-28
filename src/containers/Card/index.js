@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { deleteCard } from '../../actions';
 import { Redirect } from 'react-router-dom';
+import PropTypes  from 'prop-types';
 
 export class Card extends Component {
   constructor() {
@@ -68,4 +69,12 @@ export const mapDispatchToProps =(dispatch) => ({
   deleteCard: (id) => dispatch(deleteCard(id))
 })
 
-export default connect(null, mapDispatchToProps)(Card)
+export default connect(null, mapDispatchToProps)(Card);
+
+
+Card.propTypes = {
+  content: PropTypes.array,
+  deleteCard:PropTypes.func,
+  id: PropTypes.number,
+  title: PropTypes.string 
+}
