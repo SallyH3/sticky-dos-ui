@@ -31,8 +31,17 @@ npm test
 
 ## Wireframes and photos of project:
 
+- Home Page
+<img width="500" alt="image" src="https://user-images.githubusercontent.com/23123990/58568519-a5c89c00-81f1-11e9-871d-4f38239067fb.png">
+
+- Create New Card
+<img width="500" alt="image" src="https://user-images.githubusercontent.com/23123990/58568535-afea9a80-81f1-11e9-91ba-9530895d777f.png">
+
+- Edit Details
+<img width="500" alt="image" src="https://user-images.githubusercontent.com/23123990/58568554-ba0c9900-81f1-11e9-801a-6a6b7b523b7f.png">
+
 - Wireframe
-<img width="1001" alt="image" src="https://user-images.githubusercontent.com/23123990/58515713-eb8a5380-8162-11e9-8d0c-d0533cbf875c.png">
+<img width="500" alt="image" src="https://user-images.githubusercontent.com/23123990/58515713-eb8a5380-8162-11e9-8d0c-d0533cbf875c.png">
 
 
 ## Technologies used:
