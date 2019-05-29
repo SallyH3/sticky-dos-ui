@@ -15,24 +15,7 @@ export class Form extends Component {
       content: [{}],
       isList: false,
       listCount: 2,
-      listInputs: [
-        [
-          <input
-            key="0"
-            id="0"
-            onChange={this.handleListChange}
-            name="list"
-            type="text"
-            placeholder="Enter List Item"
-          />,
-          <i
-            key="i-0"
-            id="0"
-            onClick={this.addListInput}
-            className="far fa-plus-square"
-          />
-        ]
-      ]
+      listInputs: [0]
     };
   }
 
@@ -63,33 +46,25 @@ export class Form extends Component {
   addListInput = () => {
     let {listInputs} = this.state;
 
-    listInputs.push([
-      <input
-        key={listInputs.length}
-        id={listInputs.length}
-        onChange={this.handleListChange}
-        name="list"
-        maxLength="50"
-        type="text"
-        placeholder="Enter List Item"
-      />,
-      <i
-        key={`i-${listInputs.length}`}
-        id={listInputs.length}
-        onClick={this.removeListInput}
-        className="far fa-minus-square"
-      />
-    ]);
+    listInputs.push(listInputs.length);
 
     this.setState({listInputs});
   }
 
-  removeListInput = () => {
-    let {listInputs} = this.state
+  removeListInput = (e) => {
+    let {id} = e.target;
+    let {listInputs} = this.state;
+    let {content} = this.state;
 
-    listInputs.pop();
+    listInputs = listInputs.filter(el => {
+      return el !== parseInt(id);
+    });
 
-    this.setState({listInputs});
+    content = content.filter(lI => {
+      return parseInt(lI.id) !== parseInt(id);
+    });
+
+    this.setState({listInputs, content});
   }
 
   handleListChange = e => {
@@ -97,7 +72,7 @@ export class Form extends Component {
     let content = this.state.content;
 
     content[id] = {
-      id: Date.now(),
+      id,
       type: name,
       text: value,
       checked: false
@@ -144,16 +119,53 @@ export class Form extends Component {
     this.setState({ redirect: true });
   };
 
+  mapLI = (lI) => {
+    let icon = 
+      <i
+        key={`i-${lI}`}
+        id={lI}
+        onClick={(e) => this.removeListInput(e)}
+        className="far fa-minus-square"
+      />
+
+    if (lI === 0) {
+      icon =
+        <i
+          key={`i-0`}
+          id={0}
+          onClick={this.addListInput}
+          className="far fa-plus-square"
+        />
+    }
+
+    return (
+      <span key={lI}>
+        <input
+          key={lI}
+          id={lI}
+          onChange={(e) => this.handleListChange(e)}
+          name="list"
+          maxLength="50"
+          type="text"
+          placeholder="Enter List Item"
+        />
+        {icon}
+      </span>
+    )
+  }
+
   render() {
     let stringInput = (
-      <input
-        onChange={this.handleStrChange}
-        name="note"
-        type="text"
-        maxLength="250"
-        value={this.state.content[0].text}
-        placeholder="Enter Body"
-      />
+      <fieldset className="Form__input-content">
+        <input
+          onChange={this.handleStrChange}
+          name="note"
+          type="text"
+          maxLength="250"
+          value={this.state.content[0].text}
+          placeholder="Enter Body"
+        />
+      </fieldset>
     );
 
     if (this.state.redirect) {
@@ -183,7 +195,7 @@ export class Form extends Component {
           />
           <fieldset className="Form__input-content">
             {this.state.isList && stringInput}
-            {!this.state.isList && this.state.listInputs.map(lI => <span key={this.state.id}>{lI}</span>)}
+            {!this.state.isList && this.state.listInputs.map(lI => this.mapLI(lI))}
           </fieldset>
           <input className="Form__submit" type="submit" value="SAVE" />
         </form>
