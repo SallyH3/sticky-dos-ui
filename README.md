@@ -59,7 +59,7 @@ npm test
 
 ## Authors:
 
-[Sally Haefling](https://github.com/SallyHaefling)
+[Sally H](https://github.com/SallyH3)
 
 [Lauren Boyer](https://github.com/lboyer4)
 
